@@ -1,7 +1,6 @@
 var express= require('express')
 var router = express.Router()
 var postSchema = require("../db/schema/post")
-var multer = require ('multer')
 var path = require('path')
 var dashify = require('dashify')
 /*
