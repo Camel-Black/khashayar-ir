@@ -3,7 +3,19 @@ const mongoose = require('mongoose')
 var cors = require('cors')
 var app = express();
 var bodyParser = require('body-parser')
+var session = require('cookie-session')
+var flash = require('express-flash')
+var passport = require('passport')
 
+const instialPassport = require('./db/passport-config')
+instialPassport(passport, 
+    (username)=>{
+    return user.find({username: username})
+    },
+    (id)=>{
+        return user.findById(id)
+    }
+)
 
 
 
@@ -31,8 +43,16 @@ app.use(bodyParser({limit: '50mb'}));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use("/api",apiRouter)
+app.use(flash())
+app.use(session({
+    name: 'mysession',
+    keys: ['vueauthrandomkey'],
+    maxAge: 48 * 60 * 60 * 1000 // 48 hours
+}))
 
-//app.post
+//passport
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 

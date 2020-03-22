@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Post from '../views/Post.vue'
 import createPost from '../views/admin/create_post.vue'
-import admin from '../views/admin/Admin.vue'
+import Dashboard from '../views/admin/Dashboard.vue'
 import notFound from '../views/404.vue'
 import alogin from '../views/admin/loginPage.vue'
 
@@ -26,9 +26,9 @@ const routes = [
     component: createPost
   },
   {
-    path:'/admin/index',
-    name:"Admin",
-    component: admin
+    path:'/admin/dashboard',
+    name:"Dashboard",
+    component: Dashboard
   },
   {
     path:'*',

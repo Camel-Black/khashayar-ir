@@ -1,8 +1,20 @@
 var express= require('express')
 var router = express.Router()
 var postSchema = require("../db/schema/post")
+var userSchema  = require('../db/schema/user')
 var path = require('path')
 var dashify = require('dashify')
+var bcrypt = require('bcrypt')
+var passport = require('passport')
+
+const authmiddleware = (req,res,next)=>{
+    if(!req.isAuthenticated()){
+        res.status(401).send('WHO ARE U?')
+    }
+    else{
+        return next()
+    }
+}
 /*
 multer configuration
 
@@ -139,10 +151,60 @@ ok lets go :)
 
 */
 
-router.post("/user/login",(res,req)=>{
+router.post("/user/login",(req, res,next)=>{
+    passport.authenticate("local",(err,user,info)=>{
+        if(err){
+            console.log("/user/login/ if(err)")
+            return next(err);
+            
+        }
+        if(!user){
+            console.log("/user/login/ if(!user)")
+            return res.status(400).send([user,"WHO ARE YOU",info])
+            
+        }
+        req.login(user,(err)=>{
+            if(err){
+                console.log("/user/login/ req.login if err")
+                res.send({})
+            }
+            res.send('logged in')
+            
+        })
+    })
+})
+router.post('/user/create',async (req,res)=>{
+
+    var hashed = await bcrypt.hash(req.body.password,10)
+    let data ={
+        username: req.body.username,
+        password: hashed
+    }
+    new userSchema(data).save((err,result)=>{
+        if(err) res.send({"success": false, "result": err})
+        else{
+            res.send({"success":true ,"result":result})
+        }
+    })
 
 })
+router.post('/user/logout',(req,res)=>{
+    req.logOut()
+    console.log('Logged Out')
+    return res.send()
+})
 
+
+router.post('/user/get',authmiddleware , (req,res)=>{
+    let username = req.username
+    userSchema.find({username : username})
+    .then(user=>{
+        res.status(200).send({"user" : user})
+    })
+    .catch(err=>{
+        res.status(500).send(err)
+    })
+})
 
 
 module.exports = router
