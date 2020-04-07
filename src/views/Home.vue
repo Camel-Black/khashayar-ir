@@ -39,6 +39,7 @@ export default {
         return data.json()
       })
       .then((json)=>{
+        console.log(json)
         this.posts = json.result
 
       })

@@ -2,21 +2,14 @@ const express = require('express')
 const mongoose = require('mongoose')
 var cors = require('cors')
 var app = express();
+const morgan =require('morgan')
 var bodyParser = require('body-parser')
 var session = require('cookie-session')
 var flash = require('express-flash')
-var passport = require('passport')
 
-const instialPassport = require('./db/passport-config')
-instialPassport(passport, 
-    (username)=>{
-    return user.find({username: username})
-    },
-    (id)=>{
-        return user.findById(id)
-    }
-)
 
+mongoose.set('useFindAndModify', true);
+mongoose.set('useCreateIndex', true);
 
 
 //db config
@@ -41,6 +34,7 @@ app.use(cors({
 }))
 app.use(bodyParser({limit: '50mb'}));
 app.use(express.json())
+app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }))
 app.use("/api",apiRouter)
 app.use(flash())
@@ -50,9 +44,7 @@ app.use(session({
     maxAge: 48 * 60 * 60 * 1000 // 48 hours
 }))
 
-//passport
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 
 

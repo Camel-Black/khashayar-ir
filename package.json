@@ -10,17 +10,23 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
-    "bootstrap-vue": "^2.7.0",
+    "bootstrap-vue": "^2.10.1",
     "core-js": "^3.6.4",
     "dashify": "^2.0.0",
-    "mdbvue": "^6.5.1",
+    "jquery": "^3.4.1",
+    "moment": "^2.24.0",
     "slug": "^2.1.1",
+    "sweetalert2": "^9.10.9",
+    "view-design": "^4.1.3",
     "vue": "^2.6.11",
+    "vue-jwt-decode": "^0.1.0",
+    "vue-moment": "^4.1.0",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
+    "@mdi/font": "^5.0.45",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",
@@ -29,6 +35,10 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
+    "expose-loader": "^0.7.5",
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-vuetify": "~2.0.5",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

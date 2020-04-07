@@ -1,11 +1,14 @@
-var express= require('express')
-var router = express.Router()
-var postSchema = require("../db/schema/post")
-var userSchema  = require('../db/schema/user')
-var path = require('path')
-var dashify = require('dashify')
-var bcrypt = require('bcrypt')
-var passport = require('passport')
+
+const express= require('express')
+const router = express.Router()
+const postSchema = require("../db/schema/post")
+const userSchema  = require('../db/schema/user')
+const path = require('path')
+const dashify = require('dashify')
+const {auth} = require('./middleware')
+const userC = require('../controller/userController')
+const moment = require('moment')
+
 
 const authmiddleware = (req,res,next)=>{
     if(!req.isAuthenticated()){
@@ -63,8 +66,8 @@ router.get("/posts/:post",(req,res)=>{
 router.post("/posts/delete",(req,res)=>{
     let id = req.body.postId
     postSchema.findById(id).deleteOne((err,result)=>{
-        if(err) res.send({"success":false})
-        res.send({
+        if(err) res.status(400).send({"success":false})
+        res.status(200).send({
             "success":true,
             "result":result
         })
@@ -76,7 +79,7 @@ router.post("/posts/delete",(req,res)=>{
 router.post("/posts/update/:postId",(req,res)=>{
     let update = {
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,slug: dashify(req.body.title)
     }
     postSchema.findByIdAndUpdate(req.params.postId,update,(err,result)=>{
         if(err) res.send({"success":false})
@@ -89,24 +92,34 @@ router.post("/posts/update/:postId",(req,res)=>{
 
 //create new post
 router.post("/posts/new",(req,res)=>{
-    let getPost ={
-        title : req.body.title,
-        content: req.body.content,
-        author: req.body.author,
-        slug: dashify(req.body.title),
-        timestamp: new Date().getTime()
-    }
+    var localTime  = moment.utc().toDate();
+    localTime = moment(localTime).format('YYYY-MM-DD HH:mm:ss');  
+    var tms = moment(localTime).format("X");
 
-
-    //add to db
-    var newPost = new postSchema(getPost)
-    newPost.save((err,result)=>{
-        if(err) res.send({"success":false});
-        else{
-            console.log("new post added")
-            res.send({"success":true , "result":result});
+    console.log(tms)
+    try {
+        let getPost ={
+            title : req.body.title,
+            content: req.body.content,
+            author: req.body.author,
+            slug: dashify(req.body.title),
+            timestamp: tms
         }
-    })
+        
+    
+        //add to db
+        var newPost = new postSchema(getPost)
+        newPost.save((err,result)=>{
+            if(err) console.log(err)//res.send({"success":false});
+            else{
+                console.log("new post added")
+                res.send({"success":true , "result":result});
+            }
+        })
+    } catch (error) {
+        res.status(400).json({"err": err})
+        
+    }
 })
 
 
@@ -144,66 +157,63 @@ router.post("/posts/:postId/update/:commentId",(req,res)=>{
 
 
 /*
-COMENTS SECTION
+USER SECTION - - - - - - - - -  - - - - - 0_0
 
 here we create comments with name and email and etc...
 ok lets go :)
 
 */
 
-router.post("/user/login",(req, res,next)=>{
-    passport.authenticate("local",(err,user,info)=>{
-        if(err){
-            console.log("/user/login/ if(err)")
-            return next(err);
-            
-        }
-        if(!user){
-            console.log("/user/login/ if(!user)")
-            return res.status(400).send([user,"WHO ARE YOU",info])
-            
-        }
-        req.login(user,(err)=>{
-            if(err){
-                console.log("/user/login/ req.login if err")
-                res.send({})
-            }
-            res.send('logged in')
-            
-        })
-    })
-})
-router.post('/user/create',async (req,res)=>{
 
-    var hashed = await bcrypt.hash(req.body.password,10)
-    let data ={
-        username: req.body.username,
-        password: hashed
+router.post('/user/register',async (req,res)=>{
+     var data = {
+         email:req.body.email,
+         password:req.body.password,
+         username:req.body.username,
+         access: (req.body.access) ? req.body.access : 1
+        }
+
+    try {
+        let ix = await userC.getByUsername(data.username)
+        console.log(`${ix} ix`)
+        if(ix === "true"){
+            console.log("s")
+            return res.status(400).json({"seccess":false , "message":"Username Already Taken :/ "})
+        }
+        await userC.addUser(data)
+       
+        res.status(200).json({"success":true})
+
+    } catch (error) {
+        console.log("%c catch", "color:#FF0000")
+        console.log(error)
+
     }
-    new userSchema(data).save((err,result)=>{
-        if(err) res.send({"success": false, "result": err})
-        else{
-            res.send({"success":true ,"result":result})
+})
+
+router.post('/user/login',async (req,res)=>{
+    try {
+        var {username , password } = req.body
+        var user = await userC.compareUserPassword(username,password)
+        if(!user){
+            return res.status(401).json({error:"Who Are You?"})
         }
-    })
+        var token = await userC.tokenGenerator(user)
+        console.log(token)
+        res.status(200).json({token})
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({"success":false, "message":"err happend on /user/login route"})
+    }
 
 })
-router.post('/user/logout',(req,res)=>{
-    req.logOut()
-    console.log('Logged Out')
-    return res.send()
+
+router.get('/user/dashboard',auth,async (req,res)=>{
+
 })
-
-
-router.post('/user/get',authmiddleware , (req,res)=>{
-    let username = req.username
-    userSchema.find({username : username})
-    .then(user=>{
-        res.status(200).send({"user" : user})
-    })
-    .catch(err=>{
-        res.status(500).send(err)
-    })
+router.get('/here',(req,res)=>{
+    userC.print()
+    res.json({"ok":true})
 })
 
 
