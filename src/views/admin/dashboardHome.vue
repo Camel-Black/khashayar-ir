@@ -4,8 +4,8 @@
         <div id="wrapper" class="ss" >
         <div id="sidebar-wrapper" style="background-color: rgb(244,244,244);" ref="wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"> <a class="hover" href="#" style="color: rgb(166,166,166);">Home </a></li>
-                <li> <a class="hover" href="#" style="color: rgb(33,37,41);">Post</a></li>
+                <li class="sidebar-brand"> <a class="hover" href="#" style="color: rgb(166,166,166);">Home</a></li>
+                <li> <a class="hover" href="/admin/dashboard/posts" style="color: rgb(33,37,41);" >Post</a></li>
                 <li> <a href="#" style="color: rgb(0,0,0);">Comments</a></li>
                 <li> <a href="#" style="color: rgb(0,0,0);" @click="logUserOut">Logout</a></li>
             </ul>
@@ -28,21 +28,21 @@
                     </div>
                 </div>
                 <div class="row">
-                            <div class="card-group">
-                                
-                                <div v-for="post in posts.slice(Math.max(posts.length - 3, 0))" :key="post._id">
-                                   <b-col>
-                                    <div class="card"><img class="card-img-top w-100 d-block">
-                                        <div class="card-body">  
-                                            <h4 class="card-title">{{post.title}}</h4>
-                                            <p class="card-text"><p>{{post.content}}</p><b-button to="admin " class="d-flex btn-dark justify-content-start">Edit</b-button>
-                                            <button @click.alt="deletePost(post._id)" to="#" type="button" class="d-flex ml-auto p-2 btn btn-warning" value="Delete">Delete</button>
-                                            <p class="time">{{post.date}}</p>
+                    <div class="card-group">
+                                <div class="card" v-for="post in posts.slice(Math.max(posts.length - 3, 0))" :key="post._id" >
+                                        <img src="../../../bootstrap/assets/img/18298748_1731597263798567_5641154859978719232_n.jpg" class="card-img-top" alt="post pic">
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{post.title}}</h5>
+                                        <p class="card-text">{{post.content}}</p>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <b-button type="button" class="btn btn-dark " to="#" @click="editPost(post._id)" >Edit</b-button>
+                                                <button type="button" class="btn btn-warning" @click="deletePost(post._id)" to="#">Delete</button>
                                             </div>
-                                    </div>
-                                    </b-col>
+                                        <p class="card-text"><small class="text-muted">{{post.date}}</small></p>
+                                        </div>
+                                    
                                 </div>
-                            </div>
+                </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -80,6 +80,7 @@
             </div>
         </div>
     </div>
+    <Footer></Footer>
      </div>
 </template>
 
@@ -88,6 +89,7 @@ import moment from 'moment'
 import VueJwtDecode from 'vue-jwt-decode'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
+import Footer from '../../components/footer'
 export default {
     name:"dashboard",
     data(){
@@ -97,6 +99,10 @@ export default {
             date:[]
         }
     },
+    components:{
+        Footer
+    }
+    ,
     methods:{
         getPosts: function () {
             fetch('http://localhost:3000/api/posts/all')
@@ -127,9 +133,12 @@ export default {
       this.$router.push("/admin/login");
     },
     deletePost:function(postIds){
+        var token = localStorage.getItem("jwt");
         Axios.post("http://localhost:3000/api/posts/delete",{
             postId: postIds
-        })
+        },{
+    headers: { Authorization: "Bearer " + token }
+})
         .then(result=>{
             if(result.status == 200){
                 Swal.fire('Success','post successfully deleted',"success")
@@ -139,6 +148,9 @@ export default {
                 Swal.fire('Faild','delete post faild ','error')
             }
         })
+    },
+    editPost: function (postId) {
+        this.$router.push("/admin/post/edit/"+postId)
     }
     },
     created(){
@@ -156,3 +168,5 @@ export default {
 }
 
 </style>
+
+

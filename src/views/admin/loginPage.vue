@@ -43,7 +43,7 @@ export default {
       if(this.login.username == "" && this.login.username == "" || this.login.username == "" || this.login.username == ""){
         this.usernameMsg = "please enter ur fuckin Username fuckin idiot"
         this.passwordMsg = "please enter ur fuckin Password fuckin idiot"
-        console.log(this.u)
+        
       } 
     else{
       this.usernameMsg = ""

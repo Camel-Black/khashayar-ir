@@ -13,9 +13,19 @@ module.exports={
             // console.log(req.userData);
             next();
           } catch (err) {
+            console.log("Authentification Failed")
             return res.status(401).json({
               message: "Authentification Failed"
             });
           }
+    },
+    multererr: function(req,file,cb){
+      let allowed = ['image/png','image/jpeg','image/jpg']
+      console.log(req)
+      if(!allowed.includes(file.mimetype)){
+        const err = new Error("Wrong File Type")
+        err.code = "LIMIT_FILE_TYPES"
+        return cb(err,flase);
+      }
     }
 }

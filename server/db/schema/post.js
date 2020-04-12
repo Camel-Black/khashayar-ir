@@ -4,7 +4,6 @@ var Schema = mongoose.Schema
 var post = new Schema({
     image:String,
     title:String,
-    image:String,
     content:String,
     author:String,
     comments:[String],
@@ -14,7 +13,8 @@ var post = new Schema({
         unique:true
     },
     timestamp: String,
-    category:[String]
+    category:String,
+    tags:[String]
 
 })
 

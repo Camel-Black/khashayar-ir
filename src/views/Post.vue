@@ -1,6 +1,9 @@
 <template>
   <div>
       <div class="container">
+        <div class="img">
+          <img :src="post.image" alt="">
+        </div>
         <div class="title">
           <h1>
             {{post[0].title}}
@@ -22,6 +25,7 @@
 </template>
 
 <script>
+//import quill from 'vue-quill-editor';
 export default {
   name:"Post",
   data(){

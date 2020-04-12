@@ -2,17 +2,34 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Post from '../views/Post.vue'
-import createPost from '../views/admin/create_post.vue'
+import createPost from '../views/admin/createPost.vue'
 import dashboardHome from '../views/admin/dashboardHome.vue'
 import notFound from '../views/404.vue'
 import alogin from '../views/admin/loginPage.vue'
-
-
+import editPost from '../views/admin/editPost.vue'
+import posts from '../views/admin/posts.vue'
+import categories from '../views/admin/categories.vue'
 
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/admin/dashboard/categories',
+    name:'Category',
+    component: categories,
+    meta:{
+      requiresAuth:true
+    }
+  },
+  {
+    path: "/admin/dashboard/posts",
+    name: 'Posts',
+    component: posts,
+    meta:{
+      requiresAuth : true
+    }
+  },
   {
     path: '/',
     name: 'Home',
@@ -37,8 +54,15 @@ const routes = [
     component:dashboardHome,
     meta:{
       requiresAuth: true
-    },
-    props: true 
+    }
+  },
+  {
+    path:'/admin/post/edit/:postid',
+    name:'editPost',
+    component: editPost,
+    meta:{
+      requiresAuth: true
+    }
   },
   {
     path:'*',
@@ -59,6 +83,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("jwt") == null) {
       next({

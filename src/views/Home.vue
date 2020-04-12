@@ -1,16 +1,20 @@
 <template>
   <div>
+    <div ref="quills"></div>
     <div class="for" v-for="post in posts" v-bind:key="post._id">
       <div >
+        <div class="img">
+          <img :src="getImage(`${post.image}`)" alt="">
+        </div>
         <div class="title">
           <h1>
             {{post.title}}
           </h1>
         </div>
         <div class="content">
-          <h3>
-            {{post.content}}
-          </h3>
+          <div v-html="post.content.substring(1,post.content.length-1)">
+            
+          </div>
         </div>
         <div class="author">
           <p>{{post.author}}</p>
@@ -23,13 +27,17 @@
 </template>
 
 <script>
-import dashify from 'dashify'
+
+//import Quill from 'quill'
 export default {
   name:"Home",
   data(){
     return{
+      pashm:"asdjahskjd",
       posts:[],
-      slug:[]
+      slug:[],
+      html:[],
+      deltaS:null
     }
   },
   methods:{
@@ -41,21 +49,20 @@ export default {
       .then((json)=>{
         console.log(json)
         this.posts = json.result
-
       })
+
     },
-    dash(text){
-      return dashify(text)
+    getImage(img){
+      return require(img)
     }
 
   },
-  beforeMount(){
-
+  created(){
     this.getPost()
-
   }
-
 }
+
+
 </script>
 
 <style>

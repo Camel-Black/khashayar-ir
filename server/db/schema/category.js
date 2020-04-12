@@ -3,11 +3,9 @@ var Schema = mongoose.Schema;
 
 
 var category = new Schema({
-
-    badge:[String]
-
+    name:String
 })
 
 const Category = mongoose.model('Category', category)
 
-module.exports = category
+module.exports = Category
