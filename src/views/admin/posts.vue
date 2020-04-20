@@ -17,33 +17,60 @@
                         <div class="row padMar" style="margin: 0px;">
                             <div class="col padMar">
                                 <div class="input-group" style="margin-bottom: 26px">
-                                    <div class="input-group-prepend"></div><input class="form-control autocomplete" type="text" placeholder="Type What do u looking for?">
-                                    <div class="input-group-append"><button class="btn btn-warning" type="button"><vue-fontawesome icon="search" size="1" color="dark"></vue-fontawesome></button></div>
+                                    <div class="input-group-prepend"></div><input v-model="searchString" class="form-control autocomplete" type="text" placeholder="Type What do u looking for?">
+                                    <div class="input-group-append"><button @click="search()" class="btn btn-warning" type="button"><vue-fontawesome icon="search" size="1" color="dark"></vue-fontawesome></button></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-columns">
-                            <div class="card mb-4"  v-for="post in posts" :key="post._id">
-                                <img src="../../../bootstrap/assets/img/meeting.jpg" class="card-img-top w-100 d-block">
-                                <div class="card-body">
-                                    <h4 class="d-inline card-title">{{post.title}}</h4>
-                                    <p class="d-inline ml-3" style="color:grey">{{post.date}}</p>
-                                    <p class="card-text"><p>{{post.content}}</p>
-                                    <span class="badge badge-light d-block"
-                                        style="width: 113px;margin-bottom: 9px;">{{post.author}}</span>
-                                    <div class="btn-group" role="group">
-                                        <b-button class="btn btn-dark" type="submit" style="margin: 0px;" v-bind:href="'/admin/post/edit/'+post._id">
-                                            <vue-fontawesome icon="pencil" size="1" color="dark"></vue-fontawesome>
-                                        </b-button>
-                                        <button class="btn btn-warning" type="button" style="margin: 0px;" @click="deletePost(post._id)">
-                                            <vue-fontawesome icon="trash" size="1" color="dark"></vue-fontawesome>
-                                        </button>
-                                        <button class="btn btn-light" type="button" style="margin: 0;">
-                                            <vue-fontawesome icon="picture-o" size="1" color="dark"></vue-fontawesome>
-                                        </button>
+                        <div v-if="show">
+                            <div class="card-columns">
+                                <div class="card mb-4"  v-for="post in posts" :key="post._id">
+                                    <img :src="require('@/static/'+post.image)" class="card-img-top w-100 d-block">
+                                    <div class="card-body">
+                                        <h4 class="d-inline card-title">{{post.title}}</h4>
+                                        <p class="d-inline ml-3" style="color:grey">{{post.date}}</p>
+                                        <p class="card-text"><p class="cut" v-html="post.content.substring(1,post.content.length-1)"></p>
+                                        <span class="badge badge-light d-block"
+                                            style="width: 113px;margin-bottom: 9px;">{{post.author}}</span>
+                                        <div class="btn-group" role="group">
+                                            <b-button class="btn btn-dark" type="submit" style="margin: 0px;" v-bind:href="'/admin/post/edit/'+post._id">
+                                                <vue-fontawesome icon="pencil" size="1" color="dark"></vue-fontawesome>
+                                            </b-button>
+                                            <button class="btn btn-warning" type="button" style="margin: 0px;" @click="deletePost(post._id)">
+                                                <vue-fontawesome icon="trash" size="1" color="dark"></vue-fontawesome>
+                                            </button>
+                                            <button class="btn btn-light" type="button" style="margin: 0;">
+                                                <vue-fontawesome icon="picture-o" size="1" color="dark"></vue-fontawesome>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> 
+                                </div> 
+                            </div>
+                        </div>
+                        <div v-if="!show">
+                            <div class="card-columns">
+                                <div class="card mb-4"  v-for="post in searched" :key="post._id">
+                                    <img :src="require('@/static/'+post.image)" class="card-img-top w-100 d-block">
+                                    <div class="card-body">
+                                        <h4 class="d-inline card-title">{{post.title}}</h4>
+                                        <p class="d-inline ml-3" style="color:grey">{{post.date}}</p>
+                                        <p class="card-text"><p class="cut" v-html="post.content.substring(1,post.content.length-1)"></p>
+                                        <span class="badge badge-light d-block"
+                                            style="width: 113px;margin-bottom: 9px;">{{post.author}}</span>
+                                        <div class="btn-group" role="group">
+                                            <b-button class="btn btn-dark" type="submit" style="margin: 0px;" v-bind:href="'/admin/post/edit/'+post._id">
+                                                <vue-fontawesome icon="pencil" size="1" color="dark"></vue-fontawesome>
+                                            </b-button>
+                                            <button class="btn btn-warning" type="button" style="margin: 0px;" @click="deletePost(post._id)">
+                                                <vue-fontawesome icon="trash" size="1" color="dark"></vue-fontawesome>
+                                            </button>
+                                            <button class="btn btn-light" type="button" style="margin: 0;">
+                                                <vue-fontawesome icon="picture-o" size="1" color="dark"></vue-fontawesome>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,11 +87,16 @@ import sideBar from '../../components/dashboard/sideBar'
 import moment from 'moment'
 import Swal from 'sweetalert2'
 import Axios from 'axios'
+
 export default {
     name:'posts',
     data(){
         return{
             posts:[],
+            show: true,
+            searchString:"",
+            searched:[],
+            message:""
 
         }
     },
@@ -86,9 +118,9 @@ export default {
                     let time = moment.unix(post.timestamp).startOf('hour').fromNow()
                     let date = "date"
                     post[date] = time
+                    
                 })
             })
-            
             console.log( this.posts.content )
         },
         deletePost:function(postIds){
@@ -110,8 +142,24 @@ export default {
                 Swal.fire('Faild','delete post faild ','error')
             }
         })
-    }
     },
+    search: function(){
+        let flag = 0
+        this.show = false
+        this.posts.forEach(post=>{
+            console.log(post.title.search(this.searchString))
+            if(post.title.search(this.searchString) != -1){
+                this.searched.push(post)
+                flag++
+            }
+            else{
+                if(flag == 0){
+                    this.message = "not found"
+                }
+            }
+        })
+    }
+},
     created(){
         this.getPosts()
     }
@@ -122,6 +170,12 @@ export default {
 <style>
 @import url('../../../bootstrap/assets/css/Sidebar-Menu-1.css');
 @import url('../../../bootstrap/assets/css/styles.css');
-
+.cut { 
+  text-overflow: ellipsis !important;
+  overflow: hidden !important; 
+  width: 160px !important; 
+  height: 1.2em !important; 
+  white-space: nowrap !important;
+}
 
 </style>

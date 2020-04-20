@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Post from '../views/Post.vue'
+import Post from '../views/client/post.vue'
 import createPost from '../views/admin/createPost.vue'
 import dashboardHome from '../views/admin/dashboardHome.vue'
 import notFound from '../views/404.vue'
@@ -9,11 +9,55 @@ import alogin from '../views/admin/loginPage.vue'
 import editPost from '../views/admin/editPost.vue'
 import posts from '../views/admin/posts.vue'
 import categories from '../views/admin/categories.vue'
-
+import index from '../views/client/index.vue'
+import services from '../views/client/services.vue'
+import resume from '../views/client/resume.vue'
+import blog from '../views/client/blog.vue'
+import aboutme from '../views/client/aboutme.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/aboutme',
+    name:'About',
+    component:aboutme,
+    meta:{
+      title: 'درباره من'
+    }
+  },
+  {
+    path:'/blog',
+    name:'Blog',
+    component:blog,
+    meta:{
+      title: 'بلاگ'
+    }
+  },
+  {
+    path:'/resume',
+    name:'Resume',
+    component:resume,
+    meta:{
+      title: 'نمونه کار ها'
+    }
+  },
+  {
+    path:'/services',
+    name:'Services',
+    component:services,
+    meta:{
+      title:'خدمات'
+    }
+  },
+  {
+    path:'/',
+    name:'Index',
+    component:index,
+    meta:{
+      title: 'Khashayar Mafi'
+    }
+  },
   {
     path:'/admin/dashboard/categories',
     name:'Category',
@@ -31,12 +75,12 @@ const routes = [
     }
   },
   {
-    path: '/',
+    path: '/testhome',
     name: 'Home',
     component: Home
   },
   {
-    path:'/posts/:postName',
+    path:'/blog/:postName',
     name:'Post',
     component: Post
   },

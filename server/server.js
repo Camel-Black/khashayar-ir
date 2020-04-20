@@ -13,7 +13,7 @@ mongoose.set('useCreateIndex', true);
 
 
 //db config
-mongoose.connect("mongodb://localhost:27017/khashayarir",{useUnifiedTopology: true,useNewUrlParser: true})
+mongoose.connect("mongodb://localhost:27017/khashayarir",{useUnifiedTopology: true,useNewUrlParser: true,useFindAndModify:false})
 mongoose.connection.on("connected",(err)=>{
     if(err) throw err;
 

@@ -6,7 +6,9 @@ var post = new Schema({
     title:String,
     content:String,
     author:String,
-    comments:[String],
+    comments:[{
+        type:String
+    }],
     slug:{
         required: true,
         type:String,

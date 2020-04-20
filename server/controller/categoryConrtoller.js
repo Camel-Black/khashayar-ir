@@ -7,7 +7,9 @@ module.exports = {
             name: string
         })
         try {
-            await cat.save()
+            await cat.save((err,result)=>{
+                console.log(`${result} result of saving category`)
+            })
         } catch (error) {
             return new Error("err in saving category")
         }

@@ -2,28 +2,23 @@
 const express= require('express')
 const router = express.Router()
 const postSchema = require("../db/schema/post")
-const userSchema  = require('../db/schema/user')
 const path = require('path')
 const dashify = require('dashify')
-const {auth , multererr} = require('./middleware')
+const {auth } = require('./middleware')
 const categoryC = require('../controller/categoryConrtoller')
 const userC = require('../controller/userController')
 const moment = require('moment')
 const multer = require('multer')
 const categorySchema = require('../db/schema/category')
-
-
-var n = 0
+const commentC = require('../controller/commentController')
 
 const storage = multer.diskStorage({
     destination:function (req,file,cb) {
-        cb(null,"../src/assets/images/post")
+        cb(null,"../src/static")
     },
     filename:function (req,file,cb) {
-        n = n+1
-        n = n.toString()
-        
-        cb(null,n+'.png')
+        console.log(file.originalname)
+        cb(null,Date.now() +file.originalname)
     },
     
 })
@@ -35,15 +30,6 @@ const upload =  multer({
     }
 })
 
-// router.post('/test',(req,res)=>{
-//     var r = req.body
-//     var t = JSON.stringify(r.delta)
-//     var s = JSON.parse(t)
-//     console.log(s)
-//     res.status(200)
-// })
-
-
 
 /*
 POSTS SECTION
@@ -52,7 +38,27 @@ here we create comments with name and email and etc...
 ok lets go :)
 
 */
-
+//search post
+router.post("/posts/sreach/:query",auth,async (req,res)=>{
+    var query = req.params.query
+    try {
+        await postSchema.find({
+            $text:{
+                $search: query
+            }
+        },function(err,result){
+            if (err) throw err;
+            if (result) {
+                res.status(200).json({"data":result})
+            } else {
+                res.status(400).json({"err":"err happend in search post"})
+            }
+        
+        })
+    } catch (error) {
+        res.status(400).json({"err":error})
+    }
+})
 //get post
 router.get("/posts/all",(req,res)=>{
     postSchema.find((err,result)=>{
@@ -78,7 +84,6 @@ router.get("/posts/:post",(req,res)=>{
     .catch(err => res.status(404).json({ success: fals})
     ); 
 })
-
 //delete Post
 router.post("/posts/delete",auth,(req,res)=>{
     let id = req.body.postId
@@ -100,18 +105,37 @@ router.post("/posts/delete",auth,(req,res)=>{
 
 
 //Update posts
-router.post("/posts/update/:postId",auth,(req,res)=>{
-    let update = {
-        title: req.body.title,
-        content: req.body.content,slug: dashify(req.body.title)
-    }
-    postSchema.findByIdAndUpdate(req.params.postId,update,(err,result)=>{
-        if(err) res.send({"success":false})
-        res.send({
-            "success":true,
-            "result":result
+router.post("/posts/update/:postId",auth,upload.single('file'),(req,res)=>{
+    var localTime  = moment.utc().toDate();
+    localTime = moment(localTime).format('YYYY-MM-DD HH:mm:ss');  
+    var tms = moment(localTime).format("X");
+    let img = req.file.filename
+    
+    let body =  JSON.parse(JSON.stringify(req.body));
+    console.log(body)
+    try {
+        let getPost ={
+            image: img,
+            title :  body.title,
+            content:  body.content,
+            author:  body.author,
+            slug: dashify(body.title),
+            timestamp: tms
+        }
+        postSchema.findByIdAndUpdate(req.params.postId,getPost,(err,result)=>{
+            if(err) res.send({"success":false})
+            res.send({
+                "success":true,
+                "result":result
+            })
         })
-    })
+    } catch(err){
+        res.status(400).json({
+            "success":false,
+            "result":err
+        })
+    }
+
 })
 
 //create new post
@@ -129,8 +153,10 @@ router.post("/posts/new",upload.single('file'),(req,res)=>{
             image: img,
             title :  body.title,
             content:  body.content,
+            category: body.category,
             author:  body.author,
             slug: dashify(body.title),
+            tags: body.tags,
             timestamp: tms
         } 
         console.log(getPost)
@@ -155,13 +181,12 @@ router.post("/posts/new",upload.single('file'),(req,res)=>{
 /*
 CATEGORY SECTION
 
-here we create comments with name and email and etc...
+here we create categrory etc...
 ok lets go :)
 
 */
 
 router.get('/posts/all/category',async (req,res)=>{
-    
     categorySchema.find((err,result)=>{
         if (err) res.send({"success":false , "err": err})
         res.send({"success":true,"result":result})
@@ -226,24 +251,68 @@ router.post("/posts/:postId/comments",(req,res)=>{
 
 })
 
+router.post("/comment/pendings",auth,async (req,res)=>{
+    try {
+        await commentC.findCommentsBystastus(false,(err,comments)=>{
+            if(err) return res.status(401).json({"err" : err})
+            res.status(200).json({"data" : comments})
+        })
 
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({"err":error})
+    }
+})
+router.post("/comment/:status",auth,async (req,res)=>{
+    try {
+        var commentid = req.body.commentid
+        var status = req.params.status
+        var postid = req.body.postid
+        commentC.commentsStatusCondition(postid,commentid,status,(err,message)=>{
+            if(err){
+                console.log(err)
+                return res.status(401).json({"err" : err})
+            }
+            console.log(message)
+            res.status(200).json({"message": message})
+        })
+    } catch (err) {
+        console.log(err)
+         res.status(401).json({"err" : err})
+    }
+})
 //add new comment to a post
-router.post("/posts/:postId/newcomment",(req,res)=>{
-
+router.post("/posts/:postId/newcomment",async (req,res)=>{
+    let data = req.body.comment
+    data["postId"] = req.params.postId
+    try {
+         await commentC.newComment(data)
+            .then((data)=>{
+                res.status(200).json({"data" : data})
+            })
+            .catch((err)=>{
+                res.status(401).json({"err" : err})
+            })
+    } catch (error) {
+        res.status(400).json({"comment content:" : req.body.comment.content})
+    }
+    
 })
 
 
 //delete comment
-router.post("/posts/:postId/delete/:commentId",(req,res)=>{
-
+router.post("/comment/delete",async (req,res)=>{
+    var {commentId,postId} = req.body
+    await commentC.deleteCommentById(postId,commentId,(err,message)=>{
+        if(err) {
+            console.log(err)
+            return res.status(401).json({"err":err})
+        }
+        else{
+            res.status(200).json({message})
+        }
+    })
 })
-
-
-//update comment
-router.post("/posts/:postId/update/:commentId",(req,res)=>{
-
-})
-
 
 /*
 USER SECTION - - - - - - - - -  - - - - - 0_0

@@ -1,22 +1,25 @@
 <template>
   <div>
-      <div class="container">
-        <div class="img">
-          <img :src="post.image" alt="">
-        </div>
-        <div class="title">
-          <h1>
-            {{post[0].title}}
-          </h1>
-        </div>
-        <div class="content">
-          <h3>
-            {{post[0].content}}
-          </h3>
-        </div>
-        <div class="author">
-          <p>{{post[0].author}}</p>
-        </div>
+      <div class="container-fluid">
+          <div class="row">
+            {{post}}
+
+          </div>
+            <div class="row">
+              <div class="col">
+                <h1>
+                  
+                  {{post[0].title}}
+                </h1>    
+              </div>
+            </div>
+          <div class="content">
+            <p v-html="post[0].content">
+            </p>
+          </div>
+          <div class="author">
+            <p>{{post[0].author}}</p>
+          </div>
         <div>
           <router-link :to="'/'" >Back</router-link>
         </div>

@@ -2,14 +2,7 @@
 <!-----eslint-disable---->
      <div>
         <div id="wrapper" class="ss" >
-        <div id="sidebar-wrapper" style="background-color: rgb(244,244,244);" ref="wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand"> <a class="hover" href="#" style="color: rgb(166,166,166);">Home</a></li>
-                <li> <a class="hover" href="/admin/dashboard/posts" style="color: rgb(33,37,41);" >Post</a></li>
-                <li> <a href="#" style="color: rgb(0,0,0);">Comments</a></li>
-                <li> <a href="#" style="color: rgb(0,0,0);" @click="logUserOut">Logout</a></li>
-            </ul>
-        </div>
+        <SideBar></SideBar>
         <div class="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -30,10 +23,10 @@
                 <div class="row">
                     <div class="card-group">
                                 <div class="card" v-for="post in posts.slice(Math.max(posts.length - 3, 0))" :key="post._id" >
-                                        <img src="../../../bootstrap/assets/img/18298748_1731597263798567_5641154859978719232_n.jpg" class="card-img-top" alt="post pic">
+                                        <img :src="require('@/static/'+post.image)" class="card-img-top" alt="post pic">
                                         <div class="card-body">
                                         <h5 class="card-title">{{post.title}}</h5>
-                                        <p class="card-text">{{post.content}}</p>
+                                        <p v-html="post.content.substring(1,post.content.length-1)"></p>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <b-button type="button" class="btn btn-dark " to="#" @click="editPost(post._id)" >Edit</b-button>
                                                 <button type="button" class="btn btn-warning" @click="deletePost(post._id)" to="#">Delete</button>
@@ -85,6 +78,7 @@
 </template>
 
 <script>
+import SideBar from '../../components/dashboard/sideBar'
 import moment from 'moment'
 import VueJwtDecode from 'vue-jwt-decode'
 import Axios from 'axios'
@@ -100,7 +94,8 @@ export default {
         }
     },
     components:{
-        Footer
+        Footer,
+        SideBar
     }
     ,
     methods:{

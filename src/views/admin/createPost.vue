@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col">
                       <form action="" class="marginb">
-                        <di class="form-row">
+                        <div class="form-row">
                           <div class="col">
                             <div class="input-group flex-nowrap">
                               <input type="text" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="addon-wrapping" v-model="title">
@@ -21,12 +21,26 @@
                             <b-form-file v-model="file" :state="Boolean(file)" ref="files" placeholder="Choose a file or drop it here..." drop-placeholder="Drop file here..."  >{{file}}
                             </b-form-file> 
                           </div>
-                        </di>
+                          <div class="col">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">khashayar.ir/posts/</span>
+                              </div>
+                              <input type="text" placeholder="Enter the slug" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            </div>
+                          </div>
+                        </div>
                       </form>
                       <TextEditor class="marginb"></TextEditor>
-                      <div class="d-flex justify-content-center marginb">
-                        <b-form-tags input-id="tags-basic" v-model="value" class=" mb-2" style="width:30vw;"></b-form-tags>
-                      </div>
+                      <form>
+                        <div class="form-row">
+                          <div class="col">
+                            <div class="d-flex justify-content-center marginb">
+                              <b-form-tags input-id="tags-basic" v-model="value" class=" mb-2" style="width:30vw;"></b-form-tags>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
                       <div class="row">
                         <div class="col">
                           <div class="d-flex justify-content-start">
@@ -94,6 +108,7 @@ export default {
       formData.append('title', this.title)
       formData.append('content', d)
       formData.append('author', decode)
+      console.log(this.selected)
       formData.append('category',this.selected)
       formData.append('tags',this.value)
 
@@ -163,5 +178,8 @@ export default {
 }
 .marginb{
   margin-bottom:5vh
+}
+.slug{
+  height: 10px !important;
 }
 </style>
