@@ -24,14 +24,16 @@
                           <div class="col">
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">khashayar.ir/posts/</span>
+                                <span  class="input-group-text" id="basic-addon3">khashayar.ir/posts/</span>
                               </div>
-                              <input type="text" placeholder="Enter the slug" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                              <input v-model="slug" type="text" placeholder="Enter the slug" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                             </div>
                           </div>
                         </div>
                       </form>
-                      <TextEditor class="marginb"></TextEditor>
+                      <div class="content-holder" v-html="content"></div>
+                      {{content}}
+                      <vue-editor v-model="content" class="marginb"  />
                       <form>
                         <div class="form-row">
                           <div class="col">
@@ -69,10 +71,11 @@
 </template>
 
 <script>
+import { VueEditor } from "vue2-editor";
 import Footer from '../../components/footer'
 import sideBar from '../../components/dashboard/sideBar'
-import TextEditor from '../../components/dashboard/texteditor'
-import { mapGetters } from 'vuex'
+//import TextEditor from '../../components/dashboard/texteditor'
+//import { mapGetters } from 'vuex'
 import Axios from 'axios'
 import jsonwebtoken from 'vue-jwt-decode'
 import Swal from 'sweetalert2'
@@ -80,15 +83,18 @@ import Swal from 'sweetalert2'
 export default {
   name:"creatPost",
   components:{
-    TextEditor,
+  //  TextEditor,
     sideBar,
-    Footer
+    Footer,
+    VueEditor
   },
   data(){
     return{
+      slug:"",
       select:"",
       title:"",
       file:"",
+      content:"",
       value:["Technology"],
       options: [
         { value: null, text: 'Categories' , disabled: true  }
@@ -104,13 +110,14 @@ export default {
       console.log(this.$refs.files)
       var formData = new FormData()
       formData.append('file',this.file)
-      let d = JSON.stringify(this.delta)
+
       formData.append('title', this.title)
-      formData.append('content', d)
+      formData.append('content', this.content)
       formData.append('author', decode)
       console.log(this.selected)
       formData.append('category',this.selected)
       formData.append('tags',this.value)
+      formData.append('slug',this.slug)
 
         let config = {
           headers: {
@@ -157,9 +164,6 @@ export default {
             })
     }
   },
-  computed:{
-    ...mapGetters(['delta'])
-  },
   created(){
     this.getCategories()
   }
@@ -167,6 +171,8 @@ export default {
 </script>
 
 <style>
+
+@import url('../../assets/fonts/sahel/sahel-font.css');
 .input[type="file"] {
     display: none !important;
 }
@@ -181,5 +187,9 @@ export default {
 }
 .slug{
   height: 10px !important;
+}
+div >>> p{
+  width: 10px;
+  color: #8f3131 !important;
 }
 </style>

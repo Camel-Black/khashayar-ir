@@ -68,7 +68,7 @@
     <!-- side bar part -->
     <div class="col-lg-2 col-xl-2  d-none d-sm-none  d-md-none d-lg-block" id="sidebar" style="padding: 0px;/*background-color: initial;*//*background-size: cover;*/background: rgb(11,4,84);background: linear-gradient(132deg, rgb(11,4,84) 0%, rgb(6, 5, 75) 100%);/*bottom: 0px;*//*top: 0px;*//*position: absolute;*//*right: 0px;*/min-height: 95vh;/*max-height: 60px;*/float:right">
         <div class="row sidebar" style="margin: 0px;">
-            <div class="col text-center d-inline d-lg-flex justify-content-lg-center justify-content-center" style="margin-bottom: 32px;margin-top: 30px;"><img class="rounded-circle d-flex" src="../../assets/images/Duotone_dtn16(1).jpg" style="width: 10vw;height: 10vw;" /></div>
+            <div class="col text-center d-inline d-flex justify-content-center justify-content-center" style="margin-bottom: 32px;margin-top: 30px;"><img class="rounded-circle d-flex" src="../../assets/images/Duotone_dtn16(1).jpg" style="width: 10vw;height: 10vw;" /></div>
         </div>
         <div class="row sidebar" style="margin: 0px;">
             <div class="col">

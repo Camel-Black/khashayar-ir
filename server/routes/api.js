@@ -155,7 +155,7 @@ router.post("/posts/new",upload.single('file'),(req,res)=>{
             content:  body.content,
             category: body.category,
             author:  body.author,
-            slug: dashify(body.title),
+            slug: dashify(body.slug),
             tags: body.tags,
             timestamp: tms
         } 
@@ -267,6 +267,10 @@ router.post("/comment/:status",auth,async (req,res)=>{
     try {
         var commentid = req.body.commentid
         var status = req.params.status
+        if(status == "true") status = true
+        else{
+            status = false
+        }
         var postid = req.body.postid
         commentC.commentsStatusCondition(postid,commentid,status,(err,message)=>{
             if(err){
@@ -298,7 +302,14 @@ router.post("/posts/:postId/newcomment",async (req,res)=>{
     }
     
 })
-
+//get all comments
+router.get('/:postid/comment/all/',(req,res)=>{
+    let postid = req.params.postid
+    commentC.getAllByPostId(postid,(err,data)=>{
+        if(err) return res.status(401).json({'message':'err happend in get all post id'})
+        res.status(200).json({'data':data})
+    })
+})
 
 //delete comment
 router.post("/comment/delete",async (req,res)=>{

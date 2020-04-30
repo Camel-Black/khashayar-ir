@@ -1,50 +1,33 @@
 <template>
-  <div class="qcountainr">
-      <quillEditor
-            v-model="content"
-            ref="myQuillEditor"
-            :options="editorOption"
-      
-      ></quillEditor>
-      
+    <div>
+        {{content}}
+        <div class="sahel" v-html="content"></div>
+      <vue-editor v-model="content"  />
   </div>
 </template>
 
 <script>
-import 'quill/dist/quill.snow.css'
-import {quillEditor} from 'vue-quill-editor'
-import {mapGetters} from 'vuex'
+import { VueEditor } from "vue2-editor";
 export default {
-    name: "texteditor",
+    name: 'textEditor',
     data(){
         return{
-            content:'',
-            editorOption:{
-                debug:'info',
-                placeholder:"type ...",
-                readOnly:true,
-                theme:'snow'
-            },
-            delta: undefined
+            content:"",
+        // [{'font': [{'Sahel' : 'Sahel'}]}],
         }
     },
     components:{
-        quillEditor
-    },
-    watch:{
-        content (val){
-            console.log(`${val} this is val`)
-            this.$store.commit('setDelta',val)
-        }
-    },
-    computed:{
-        ...mapGetters(['delta'])
+        VueEditor
     }
 }
 </script>
 
 <style>
-.ql-container{
-    height: 60vh;
+@import url('../../assets/fonts/sahel/sahel-font.css');
+
+
+p{
+    font-family: Sahel !important;
 }
+
 </style>

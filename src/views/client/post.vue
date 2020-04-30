@@ -1,11 +1,96 @@
 <template>
+<!-- eslint-disable-->
     <div class="row" style="margin: 0px;width:100%;height:100vh">
 <!-- content part -->
         <div class="col-lg-10 col-xl-10 col-md-12 col-sm-12 col-xs-12 overflow-auto back">
-            <div class="justify-conten-center"></div>
+            <div class="postContainer text-center">
+                <div class="row">
+                    <div class="col" >
+                        <div class="image-header">
+                            <img :src="require('../../static/'+post[0].image)" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="header">
+                    <div class="col text-right d-flex justify-content-end justify-content-md-end">
+                        <h1 style="font-weight:bold">{{post[0].title}}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right d-flex justify-content-end ss qq">
+                        
+                        <p style="font-family: Sahel" v-html="post[0].content"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex ss">
+                        <p class="float-left justify-content-end" style="position: absolute;right: 7vw;color:grey;font-size:15px;"> نویسنده: خشایار مافی</p>
+                        <p style="color:grey;font-size:15px;">دوروز پیش</p>
+                    </div>
+                </div>
+                <div class="row ss mobile">
+                    <div class="col d-flex justify-content-end align-items-start" style="height: 2vw;">
+                        <span class="badge badge-primary" style="background-color: #f8339e;">شومبول طلا</span>
+                    </div>
+                </div>
+                <!-- comments -->
+                <div class="ss" style="margin-bottom:2vw">
+                    <div class="col round" style="padding: 0px;background-color: #ffffff; padding: 0.2vw 2vw">
+                        <div>
+                            <div class="d-flex" style="margin-top: 2vw;">
+                                <p class="d-sm-flex" style="color:grey;font-size:10px">دو روز پیش</p>
+                                <p style="right: 2vw;position: absolute;font-weight:bold">سمیرا</p>
+                            </div>
+                            <div class="text-right">
+                                <p><br />ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
+                                    کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این
+                                    صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی <br /><br /></p>
+                            </div>
+                            <div>
+                                <p class="d-flex" style="color: rgb(248,51,158);font-family: Sahel;font-weight: bold;">پاسخ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <h4>نظر بدهید</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col ss">
+                                <div>
+                                    <div class="form-group " style="margin: 0px;">
+                                        <div class="row text-right " style="margin: 0px; margin-bottom:2vw">
+                                            <div class="col d-flex justify-content-center  " style="padding: 0px;">
+                                                <input type="text " class="hover" style="width: 20vw;height:2vw" />
+                                            </div>
+                                            <div class="col d-flex justify-content-center" style="width: auto;padding: 0px;">
+                                                <input type="form-control"  class="d-flex justify-content-end hover" style="width: 20vw;height:2vw" />
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin: 0px;">
+                                            <div class="col d-flex justify-content-center" style="padding: 0px;">
+                                                <input type="text form-contro" style="height: 20vmax;width: 50vw;" class="d-flex justify-content-start" />
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col">
+                                                <input type="button" value="ارسال" style="margin:2vw">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 <!-- side bar part -->
-        <div class="col-lg-2 col-xl-2  d-none d-sm-none  d-md-none d-lg-block shadow-3 shadow-lg" id="sidebar" style="padding: 0px;/*background-color: initial;*//*background-size: cover;*/backgorund:white;min-height: 95vh;float:right">
+        <div class="col-lg-2 col-xl-2  d-none d-sm-none  d-md-none d-lg-block shadow-3 shadow-lg" id="sidebar" style="transition:0.2s;padding: 0px;/*background-color: initial;*//*background-size: cover;*/backgorund:white;min-height: 95vh;float:right">
             <div class="row sidebar" style="margin: 0px;">
                 <div class="col text-center d-inline d-lg-flex justify-content-lg-center justify-content-center" style="margin-bottom: 32px;margin-top: 30px;"><img class="rounded-circle d-flex" src="../../assets/images/Color-transfer(1).jpg" style="width: 10vw;height: 10vw;" /></div>
             </div>
@@ -28,7 +113,7 @@
             </div>
             <div class="col"
                 style="margin: 0px;bottom:1px;position : absolute">
-                <div class="col text-center float-right sidebar" style="padding: 0px;font-size: 1.2vw;color:#F8359E"><i class="fa fa-twitter ml-3"></i><i class="fa fa-telegram ml-3"></i><i class="fa fa-github ml-3"></i><i class="fa fa-instagram ml-3"></i>
+                <div class="col text-center float-right sidebar" style="padding: 0px;font-size: 1.2vw;"><a href="https://twitter.com/lanfositmostasl"><i class="fa fa-twitter ml-3"></i></a><a href="https://t.me/kh_mfi"><i class="fa fa-telegram ml-3"></i></a><a href="https://github.com/Camel-Black"><i class="fa fa-github ml-3"></i></a><a href="https://www.instagram.com/khashayar_mafi"><i class="fa fa-instagram ml-3"></i></a>
                     <div>
                         <p class="text-center d-inline" style="margin: 0px;font-family: Sahel;color: grey;font-size: 0.75vw;">طراحی و توسعه
                         <span class="text-center d-inline" style="margin: 0px;font-family: Sahel;color: black;font-weight: 900;font-size: 0.75vw;">خشایار مافی</span></p>
@@ -44,8 +129,25 @@
 export default {
     data(){
         return{
-            contact: 'تماس'
+            contact: 'تماس',
+            post:{}
         }
+    },
+    methods:{
+        getSinglePost(){
+            var title = this.$route.params.postName
+            fetch(`http://localhost:3000/api/posts/${title}`)
+            .then(data =>{
+                return data.json()
+            })
+            .then(json =>{ 
+                this.post = json
+                console.log(this.post[0].content)
+            })
+        }
+    },
+    created(){
+        this.getSinglePost()
     }
 }
 </script>
@@ -86,7 +188,7 @@ export default {
 }
 
 .back{
-    
+    padding: 0vw 10vw;
     height: 100vh;
     width: 100%;
     position: relative;
@@ -155,23 +257,84 @@ export default {
   background: #a7a7a7; 
   border-radius: 10px;
 }
-/* .imgs{
+.imgs{
   margin: 1vw;
   min-width: 150px;
   min-height: 90px;
   width:25vw;
   height: 21vw;
   border-radius: 2vw ;
-  background-image: url(1.jpg) !important;
+  
   background-size:cover !important;
   background-repeat: no-repeat !important;
   transform: background-size 0.2s;
-} */
-/* .imgs:hover{
+}
+.imgs:hover{
   background-size: 150% !important;
   transition: all 0.3s ease-in-out !important;
-} */
-@media screen and (max-width:600px){
-
 }
+@media screen and (max-width:600px){
+    span{
+        font-size: 1vmax;
+    }
+}
+a{
+    color: #292929;
+}
+a:hover{
+    color: #555555;
+}
+.postContainer{
+    margin-top: 2vw;
+    height: 100%;
+}
+img{ 
+    border-radius: 2vw 2vw 0 0;
+}
+#header{
+    padding-right: 7vw;
+    padding-top: 2vw;
+}
+
+h1,h2,h3,h4,h5,span,input{
+    font-family: Sahel;
+}
+.qq{
+   font-family: Sahel; 
+   
+}
+.ss{
+    padding: 0px 7vw;
+    margin-top: 1vw;
+    overflow:visible;
+}
+.round{
+    border-radius:2vw ;
+}
+input{
+    border-radius: 2vw;
+    border: none;
+    text-align: right !important;
+    padding-left:0;
+padding-top:0;
+padding-bottom:0.4em;
+padding-right: 0.4em;
+}
+input:active{
+    border: none;
+    
+}
+ div >>> p{
+   /* break-inside: avoid-column im; */
+   /* display: block; */
+   /* overflow-wrap: break-word !important; */
+   content: '\A';
+   white-space:pre-line;
+}
+
+.form-control:focus {
+  border-color: #FF0000 !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+}
+
 </style>>

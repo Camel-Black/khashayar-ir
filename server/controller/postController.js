@@ -3,7 +3,8 @@ const post = require('../db/schema/post')
 module.exports = {
     addComment: async function(commentId,postId,cb){
         try {
-                await post.update({_id :postId},{
+            console.log(`-----------postcon----- commnet_id : ${commentId} \n post_id : ${postId} \n -----------postcon-----`)
+            await post.update({_id :postId},{
                     $push:{
                         comments : commentId
                     }
@@ -27,5 +28,14 @@ module.exports = {
                 console.log(err)
                 cb(err)
             })
+    },
+    deleteByCategorie:async function(category,cb){
+        await post.deleteMany({category : category})
+        .then(data=>{
+            cb(null,data)
+        })
+        .catch(err=>{
+            cb(err)
+        })
     }
 }

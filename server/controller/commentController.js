@@ -16,13 +16,25 @@ module.exports = {
         }
     },
     commentsStatusCondition: async function(postId,commentId,status,cb){
+        console.log(`-----status---- \n ${status} --- \n ${typeof(status)} ---- \n`)
         if(status){
+            console.log(`-----------commentcon----- commnet_id : ${commentId} \n post_id : ${postId} \n -----------commentcon-----`)
+            
             await post.addComment(commentId,postId,(err)=>{
                 if(err) cb(err)
 
             }).then(()=>{
-                commentSchema.update({_id: commentId},{status: true})
-                cb(null,{"message":"successfully added to post"})
+                commentSchema.updateOne({_id: commentId},{
+                    "status": true
+                }).then(data=>{
+                    if(data.nModified == 1){
+                        cb(null, "success")
+                    }
+                    else{
+                        cb(`${data.nModified} the number off modified`)
+                    }
+                })
+                
             }).catch(err=>{
                 cb(err)
             })
@@ -33,7 +45,7 @@ module.exports = {
             }).then(()=>{
                 commentSchema.findByIdAndDelete({commentId})
                 .then(()=>{
-                    cb(null,{"message":"successfully added to post"})
+                    cb(null,{"message":"what the hell"})
                 })
             }).catch(err=>{
                 cb(err)
@@ -67,5 +79,14 @@ module.exports = {
                     }
                 })
             })
+    },
+    getAllByPostId:async function(postid,cb){ //for accepted comments
+        await commentSchema.find({postId : postid,status: true})
+        .then((data)=>{
+            cb(null,data)
+        })
+        .catch(err=>{
+            cb(err,{'message':'err happen in get all comments from single post'})
+        })
     }
 }

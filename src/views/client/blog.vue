@@ -3,26 +3,20 @@
         <!-- content part -->
         <div class="col-lg-10 col-xl-10 col-md-12 col-sm-12 col-xs-12 back overflow-auto" style="height:100vh;" id="si" >
             <div id="container" class="d-flex justify-content-center align-items-center" style="min-height:100vh">
-                <div class=" tex-center d-flex justify-content-center" style="display: flex;flex-wrap: wrap;align-content: flex-start;">
-                    <div class="shadow-lg" style="position:relative;margin: 1vw;min-width: 150px;min-height: 90px;
-width:25vw;
-height: 21vw;
-border-radius: 2vw ;
-background-image: url(1.jpg) !important;
-background-size:cover !important;
-background-repeat: no-repeat !important;
-transform: background-size 0.2s;">
+                <div v-for="post in posts" :key="post.id" class=" tex-center d-flex justify-content-center" style="display: flex;flex-wrap: wrap;align-content: flex-start;">
+                    <div class="shadow-lg dafs" :style="{'background-image':`url(${require('@/static/'+post.image)})`,'position':'relative'}">
                         <div class="text-right justify-content-start align-items-end align-content-center service-items">
                             <div id="postHeader" class="col-6 text-right justify-content-start align-items-end align-content-center ">
-                                <h1  class="d-block align-items-start break-long-words" style="word-wrap: break-word !important;color: rgb(255,255,255);font-family: Sahel;font-weight: bold;font-size: 1.5vw">فراوانی و وفور نعمت؛ دروغی مدرن</h1>
+                                <h1  class="d-block align-items-start break-long-words" style="word-wrap: break-word !important;color: rgb(255,255,255);font-family: Sahel;font-weight: bold;font-size: 1.5vw">{{post.title}}</h1>
                             </div>
                         </div>
                         <div class="chips d-flex justify-content-center align-items-center curs">
-                            <p class="d-flex justify-content-center align-items-center" style="font-family: Sahel;color: rgb(255,255,255);font-size: .60vw;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;">
+                            <p @click="$router.push('/blog/'+post.slug)" class="d-flex justify-content-center align-items-center" style="font-family: Sahel;color: rgb(255,255,255);font-size: .60vw;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;">
                                     بیشتر
                             </p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -63,11 +57,37 @@ transform: background-size 0.2s;">
 </template>
 
 <script>
+// import $ from 'jquery'
+import moment from 'moment'
 export default {
     data(){
         return{
-            contact: 'تماس'
+            contact: 'تماس',
+            posts:[]
         }
+    },
+    methods:{
+        getPosts: function () {
+            fetch('http://localhost:3000/api/posts/all')
+            .then(data=>{
+                return data.json()
+            })
+            .then(result=>{
+                let res = result.result
+                this.posts = res
+                
+                this.posts.forEach(post=>{
+                    let time = moment.unix(post.timestamp).startOf('hour').fromNow()
+                    let date = "date"
+                    post[date] = time
+                })
+            })
+            
+            console.log( this.posts.content )
+        }
+    },
+    created(){
+        this.getPosts()
     }
 }
 </script>
@@ -195,5 +215,16 @@ export default {
 } */
 @media screen and (max-width:600px){
 
+}
+.dafs{
+margin: 1vw;
+min-width: 150px;
+min-height: 90px;
+width:25vw;
+height: 21vw;
+border-radius: 2vw ;
+
+background-size:cover !important;
+background-repeat: no-repeat !important;transform: background-size 0.2s;
 }
 </style>>

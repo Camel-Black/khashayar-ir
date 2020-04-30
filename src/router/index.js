@@ -14,6 +14,7 @@ import services from '../views/client/services.vue'
 import resume from '../views/client/resume.vue'
 import blog from '../views/client/blog.vue'
 import aboutme from '../views/client/aboutme.vue'
+const DEFAULT_TITLE = 'Khashayar Mafi || خشایار مافی';
 
 Vue.use(VueRouter)
 
@@ -55,7 +56,7 @@ const routes = [
     name:'Index',
     component:index,
     meta:{
-      title: 'Khashayar Mafi'
+      title: 'Khashayar Mafi || خشایار مافی'
     }
   },
   {
@@ -156,5 +157,12 @@ router.beforeEach((to, from, next) => {
 //   }
 // })
 
+router.afterEach((to) => {
+    // Use next tick to handle router history correctly
+    // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
+    Vue.nextTick(() => {
+        document.title = to.meta.title || DEFAULT_TITLE;
+    });
+});
 
 export default router
