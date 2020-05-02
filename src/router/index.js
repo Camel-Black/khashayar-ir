@@ -15,10 +15,21 @@ import resume from '../views/client/resume.vue'
 import blog from '../views/client/blog.vue'
 import aboutme from '../views/client/aboutme.vue'
 const DEFAULT_TITLE = 'Khashayar Mafi || خشایار مافی';
+import comments from '../views/admin/comments'
+import NProgress from 'nprogress';
+
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: "/admin/dashboard/comments",
+    name: 'Comments',
+    component: comments,
+    meta:{
+      requiresAuth : true
+    }
+  },
   {
     path:'/aboutme',
     name:'About',
@@ -128,7 +139,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("jwt") == null) {
       next({
@@ -141,6 +151,12 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+router.beforeResolve((to,from,next ) => {
+  if (to.name) {
+      NProgress.start()
+  }
+  next()
+})
 
 // router.beforeEach((to,from,next)=>{
 //   ViewUI.LoadingBar.start();
@@ -158,11 +174,12 @@ router.beforeEach((to, from, next) => {
 // })
 
 router.afterEach((to) => {
-    // Use next tick to handle router history correctly
-    // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
     Vue.nextTick(() => {
         document.title = to.meta.title || DEFAULT_TITLE;
+        NProgress.done()
     });
+    
+    
 });
 
 export default router

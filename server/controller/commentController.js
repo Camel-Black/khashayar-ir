@@ -2,23 +2,25 @@ const commentSchema = require('../db/schema/comments')
 const post = require('./postController')
 
 module.exports = {
-    newComment: async function(comment){
+    newComment: async function(comment,cb){
+        console.log(comment);
+        
         try {
             let data  = new commentSchema(comment)
             await data.save()
-            .catch(err=>{
-                console.log(err)
-            })
-            return true
+                .then(data=>{
+                    cb(false,`comment added succefully: ${data}`)
+                })
+            
         } catch (error) {
-            console.log(err)
-            return false
+            console.log(error)
+            cb(true,error)
         }
     },
     commentsStatusCondition: async function(postId,commentId,status,cb){
-        console.log(`-----status---- \n ${status} --- \n ${typeof(status)} ---- \n`)
+        // console.log(`-----status---- \n ${status} --- \n ${typeof(status)} ---- \n`)
         if(status){
-            console.log(`-----------commentcon----- commnet_id : ${commentId} \n post_id : ${postId} \n -----------commentcon-----`)
+            // console.log(`-----------commentcon----- commnet_id : ${commentId} \n post_id : ${postId} \n -----------commentcon-----`)
             
             await post.addComment(commentId,postId,(err)=>{
                 if(err) cb(err)
@@ -40,16 +42,20 @@ module.exports = {
             })
         }
         else{
-            await post.removeCommentsOfPost(commentId,postId,(err)=>{
-                if(err) cb(err)
-            }).then(()=>{
-                commentSchema.findByIdAndDelete({commentId})
-                .then(()=>{
-                    cb(null,{"message":"what the hell"})
+            // console.log("S")
+            // console.log
+            await commentSchema.findByIdAndDelete(commentId)
+                .then(data=>{
+                    console.log(`data: ${data}`)
+                    console.log(`commentId: ${commentId}`)
+                    // console.log("adadadadad-------")
+                    cb(null,`deleted successfully ${data}`)
                 })
-            }).catch(err=>{
-                cb(err)
-            })
+                .catch((err)=>{
+                    // console.log("adwhahas-------")
+                    cb(err)
+                })
+                
         }
     },
     findCommentsBystastus:async function(key,cb){

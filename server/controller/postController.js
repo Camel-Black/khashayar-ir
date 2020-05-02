@@ -19,7 +19,8 @@ module.exports = {
         }
     },
     removeCommentsOfPost: async function(commentId,postId,cb){
-        await post.update({_id :postId},{
+        console.log("man injam")
+        await post.updateOne({_id :postId},{
             $pull:{
                 comments : commentId
             }
@@ -32,10 +33,19 @@ module.exports = {
     deleteByCategorie:async function(category,cb){
         await post.deleteMany({category : category})
         .then(data=>{
-            cb(null,data)
+            cb(false,data)
         })
         .catch(err=>{
             cb(err)
         })
+    },
+    findByTag: async function(tag,cb){
+        await post.find({tags: tag})
+            .then(data=>{
+                cb(null,data)
+            })
+            .catch(err=>{
+                cb(err)
+            })
     }
 }

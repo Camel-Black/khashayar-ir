@@ -34,20 +34,21 @@
                     </div>
                 </div>
                 <!-- comments -->
-                <div class="ss" style="margin-bottom:2vw">
-                    <div class="col round" style="padding: 0px;background-color: #ffffff; padding: 0.2vw 2vw">
-                        <div>
-                            <div class="d-flex" style="margin-top: 2vw;">
-                                <p class="d-sm-flex" style="color:grey;font-size:10px">دو روز پیش</p>
-                                <p style="right: 2vw;position: absolute;font-weight:bold">سمیرا</p>
-                            </div>
-                            <div class="text-right">
-                                <p><br />ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                                    کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این
-                                    صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی <br /><br /></p>
-                            </div>
+                {{comments}}
+                <div v-for="comment in comments" :key="comment._id">
+                    <div class="ss" style="margin-bottom:2vw">
+                        <div class="col round" style="padding: 0px;background-color: #ffffff; padding: 0.2vw 2vw">
                             <div>
-                                <p class="d-flex" style="color: rgb(248,51,158);font-family: Sahel;font-weight: bold;">پاسخ</p>
+                                <div class="d-flex" style="margin-top: 2vw;">
+                                    <p class="d-sm-flex" style="color:grey;font-size:10px">دو روز پیش</p>
+                                    <p style="right: 2vw;position: absolute;font-weight:bold">{{comment.name}}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p><br />{{comment.content}}<br /><br /></p>
+                                </div>
+                                <div>
+                                    <p class="d-flex" style="color: rgb(248,51,158);font-family: Sahel;font-weight: bold;">پاسخ</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,20 +66,20 @@
                                     <div class="form-group " style="margin: 0px;">
                                         <div class="row text-right " style="margin: 0px; margin-bottom:2vw">
                                             <div class="col d-flex justify-content-center  " style="padding: 0px;">
-                                                <input type="text " class="hover" style="width: 20vw;height:2vw" />
+                                                <input type="text" v-model="email" class="form-control" style="width: 20vw;height:2vw" placeholder="ایمیل" />
                                             </div>
                                             <div class="col d-flex justify-content-center" style="width: auto;padding: 0px;">
-                                                <input type="form-control"  class="d-flex justify-content-end hover" style="width: 20vw;height:2vw" />
+                                                <input type="text" v-model="name" class="d-flex justify-content-end form-control" style="width: 20vw;height:2vw" placeholder="نام"  />
                                             </div>
                                         </div>
                                         <div class="row" style="margin: 0px;">
                                             <div class="col d-flex justify-content-center" style="padding: 0px;">
-                                                <input type="text form-contro" style="height: 20vmax;width: 50vw;" class="d-flex justify-content-start" />
+                                                <textarea type="text" v-model="content" style="height: 20vmax;width: 50vw;padding:2vw;" class="d-flex justify-content-start form-control" placeholder=" نظر خود را بنویسید " ></textarea>
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col">
-                                                <input type="button" value="ارسال" style="margin:2vw">
+                                                <button @click="sendCommnet" type="button" class="btn btn-light" style="margin:2vw"> ارسال</button>
                                             </div>
                                         </div>
                                     </div>
@@ -126,11 +127,18 @@
 </template>
 
 <script>
+import axios from 'axios'
+import Swal from 'sweetalert2'
+
 export default {
     data(){
         return{
             contact: 'تماس',
-            post:{}
+            post:{},
+            comments:[],
+            name:"",
+            email:"",
+            content:""
         }
     },
     methods:{
@@ -142,12 +150,45 @@ export default {
             })
             .then(json =>{ 
                 this.post = json
-                console.log(this.post[0].content)
             })
-        }
+            .then(()=>{
+                
+                axios.get(`http://localhost:3000/api/${this.post[0]._id}/comment/all/`)
+                    .then(data=>{
+                        this.comments =  data.data.data
+                    })
+
+                    .catch(err=>{
+                        console.log(err)
+                    })
+            })
+        },
+        sendCommnet(){
+            let postid= this.post[0]._id
+            console.log(postid)
+            axios.post(`http://localhost:3000/api/posts/${postid}/newcomment`,{
+                name: this.name,
+                email: this.email,
+                content: this.content
+            })
+                .then(data=>{
+                    Swal.fire({
+                        title: 'با موفقیت ثبت شد',
+                        text:'نظر برای تایید به ادمین ارسال شد',
+                        icon: 'success',
+                        timer: 2200,
+                        showConfirmButton: false,
+                    })
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+        },
+
     },
     created(){
         this.getSinglePost()
+        
     }
 }
 </script>
@@ -315,10 +356,7 @@ input{
     border-radius: 2vw;
     border: none;
     text-align: right !important;
-    padding-left:0;
-padding-top:0;
-padding-bottom:0.4em;
-padding-right: 0.4em;
+    padding: 1vw 2vw;
 }
 input:active{
     border: none;
@@ -332,9 +370,31 @@ input:active{
    white-space:pre-line;
 }
 
-.form-control:focus {
-  border-color: #FF0000 !important;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+form .form-control:focus{
+  border-color: #ae29d6 !important;
+  box-shadow: none;
+}
+textarea{
+    border-radius: 2vw;
+    border: none;
+    text-align: right !important;
+    padding-left:0;
+    padding-top:0;
+    padding-bottom:0.4em;
+    padding-right: 0.4em;
+    font-family: Sahel;
+}
+button{
+
+    padding: 1vw 2vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Sahel;
+    border-radius: 5vw;
+    transition: 0.2s;
+    font-weight: bold;
 }
 
 </style>>

@@ -11,6 +11,7 @@ const moment = require('moment')
 const multer = require('multer')
 const categorySchema = require('../db/schema/category')
 const commentC = require('../controller/commentController')
+const postC = require('../controller/postController')
 
 const storage = multer.diskStorage({
     destination:function (req,file,cb) {
@@ -39,6 +40,7 @@ ok lets go :)
 
 */
 //search post
+
 router.post("/posts/sreach/:query",auth,async (req,res)=>{
     var query = req.params.query
     try {
@@ -58,6 +60,18 @@ router.post("/posts/sreach/:query",auth,async (req,res)=>{
     } catch (error) {
         res.status(400).json({"err":error})
     }
+})
+//search post by tag
+router.get('/posts/search/tag',(req,res)=>{
+    var tag = req.body.tag
+    postC.findByTag(tag,(err,data)=>{
+        if(err){
+            return res.status(400).json({"success":false,"err":err})
+        }
+        res.status(200).json({"success":true,"data":data})
+
+    })
+    
 })
 //get post
 router.get("/posts/all",(req,res)=>{
@@ -238,7 +252,7 @@ router.post('/posts/delete/category', (req,res)=>{
 
 
 /*
-COMENTS SECTION
+COMMENTS SECTION
 
 here we create comments with name and email and etc...
 ok lets go :)
@@ -254,7 +268,9 @@ router.post("/posts/:postId/comments",(req,res)=>{
 router.post("/comment/pendings",auth,async (req,res)=>{
     try {
         await commentC.findCommentsBystastus(false,(err,comments)=>{
-            if(err) return res.status(401).json({"err" : err})
+            if(err) {
+                return res.status(401).json({"err" : err})
+            }
             res.status(200).json({"data" : comments})
         })
 
@@ -266,6 +282,7 @@ router.post("/comment/pendings",auth,async (req,res)=>{
 router.post("/comment/:status",auth,async (req,res)=>{
     try {
         var commentid = req.body.commentid
+        console.log(commentid)
         var status = req.params.status
         if(status == "true") status = true
         else{
@@ -287,19 +304,22 @@ router.post("/comment/:status",auth,async (req,res)=>{
 })
 //add new comment to a post
 router.post("/posts/:postId/newcomment",async (req,res)=>{
-    let data = req.body.comment
+    var data = req.body
     data["postId"] = req.params.postId
-    try {
-         await commentC.newComment(data)
-            .then((data)=>{
-                res.status(200).json({"data" : data})
-            })
-            .catch((err)=>{
-                res.status(401).json({"err" : err})
-            })
-    } catch (error) {
-        res.status(400).json({"comment content:" : req.body.comment.content})
-    }
+    console.log(data)
+    // console.log(data.postId)
+    console.log(`${req.params.postId}`)
+
+         await commentC.newComment(data,(err,message)=>{
+             if(err){
+                 console.log(err)
+                return res.status(400).json({"err" : message})
+
+             }
+             res.status(200).json({"message":message})
+         })
+
+
     
 })
 //get all comments

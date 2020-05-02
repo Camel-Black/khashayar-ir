@@ -35,7 +35,7 @@
                                         </div>
                                     
                                 </div>
-                </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -55,7 +55,8 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <p><a href="#">Sara Doe:</a> This guy has been going 100+ MPH on side streets. <br>
-<small class="text-muted">August 6, 2016 @ 10:35am </small></p>
+                                                                            <small class="text-muted">August 6, 2016 @ 10:35am </small>
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </div>

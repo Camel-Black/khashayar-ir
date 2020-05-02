@@ -8,7 +8,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'expose-loader?jquery!jquery' 
 //import material-icon scss
 import "font-awesome/css/font-awesome.min.css";
- 
+import '../node_modules/nprogress/nprogress.css'
+
 //defined as global component
 Vue.component('VueFontawesome', require('vue-fontawesome-icon/VueFontawesome.vue').default);
  

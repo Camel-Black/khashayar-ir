@@ -11,10 +11,6 @@ var comments = new Schema({
         required:[true,"please enter your email"],
         type:String
     },
-    title:{
-        required: [true,"please enter title"],
-        type: String,
-    },
     content:{
         required:[true,"please enter Comment"],
         type:String
@@ -32,10 +28,8 @@ var comments = new Schema({
         type: Boolean,
         default:false
     },
-    postId:{
-        required:true,
-        type:String
-    }
+    postId: String,
+    timestamp: String
 
     
 })
