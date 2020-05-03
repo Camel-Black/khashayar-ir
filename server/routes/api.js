@@ -62,14 +62,13 @@ router.post("/posts/sreach/:query",auth,async (req,res)=>{
     }
 })
 //search post by tag
-router.get('/posts/search/tag',(req,res)=>{
-    var tag = req.body.tag
+router.get('/posts/search/:tag',(req,res)=>{
+    var tag = req.params.tag
     postC.findByTag(tag,(err,data)=>{
         if(err){
             return res.status(400).json({"success":false,"err":err})
         }
         res.status(200).json({"success":true,"data":data})
-
     })
     
 })
@@ -101,20 +100,39 @@ router.get("/posts/:post",(req,res)=>{
 //delete Post
 router.post("/posts/delete",auth,(req,res)=>{
     let id = req.body.postId
+    console.log(id)
     try {
-        postSchema.findById(id).deleteOne((err,result)=>{
+        // postSchema.findById(id).deleteOne((err,result)=>{
+
+        
+        // })
+        var singlePost = postSchema.findById(id)
+        singlePost
+            .then(data=>{
+                let comment = data.comments
+                if(comment.length != 0 ){
+                    commentC.deletManyById(comment,(err,message)=>{
+                            if (err) return res.status(400).send({"success":false})
+                        })
+                    }
+                })
+        singlePost.deleteOne((err,data)=>{
             if(err){
                 console.log("ss")
                 return res.status(400).send({"success":false})
             }
             res.status(200).send({
                 "success":true,
-                "result":result
-            })
+                "result":data
+            }).end()
+                
         })
-    } catch (error) {
+        console.log(singlePost)
+    } 
+    catch (error) {
         console.log(error)
     }
+
 })
 
 
@@ -156,11 +174,12 @@ router.post("/posts/update/:postId",auth,upload.single('file'),(req,res)=>{
 router.post("/posts/new",upload.single('file'),(req,res)=>{
     console.log("kosse nanae noode")
     var localTime  = moment.utc().toDate();
-    localTime = moment(localTime).format('YYYY-MM-DD HH:mm:ss');  
+    localTime = moment(localTime).format('YYYY-MM-DD HH:mm:ss');
     var tms = moment(localTime).format("X");
     let img = req.file.filename
     
     let body =  JSON.parse(JSON.stringify(req.body));
+    var tags = body.tags.split(',')
     console.log(body)
     try {
         let getPost ={
@@ -170,7 +189,7 @@ router.post("/posts/new",upload.single('file'),(req,res)=>{
             category: body.category,
             author:  body.author,
             slug: dashify(body.slug),
-            tags: body.tags,
+            tags: tags,
             timestamp: tms
         } 
         console.log(getPost)
@@ -305,7 +324,11 @@ router.post("/comment/:status",auth,async (req,res)=>{
 //add new comment to a post
 router.post("/posts/:postId/newcomment",async (req,res)=>{
     var data = req.body
+    var localTime  = moment.utc().toDate();
+    localTime = moment(localTime).format('YYYY-MM-DD HH:mm:ss');
+    var tms = moment(localTime).format("X");
     data["postId"] = req.params.postId
+    data['timestamp'] = tms
     console.log(data)
     // console.log(data.postId)
     console.log(`${req.params.postId}`)

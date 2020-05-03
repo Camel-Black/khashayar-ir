@@ -17,11 +17,19 @@ import aboutme from '../views/client/aboutme.vue'
 const DEFAULT_TITLE = 'Khashayar Mafi || خشایار مافی';
 import comments from '../views/admin/comments'
 import NProgress from 'nprogress';
-
+import tag from '../views/client/postByTag.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/posts/tag/:tag',
+    name:'postByTag',
+    component:tag,
+    meta:{
+      title: 'جستو جو'
+    }
+  },
   {
     path: "/admin/dashboard/comments",
     name: 'Comments',

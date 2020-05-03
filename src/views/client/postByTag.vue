@@ -68,12 +68,13 @@ export default {
     },
     methods:{
         getPosts: function () {
-            fetch('http://localhost:3000/api/posts/all')
+            var tag = this.$route.params.tag
+            fetch(`http://localhost:3000/api/posts/search/${tag}`)
             .then(data=>{
                 return data.json()
             })
             .then(result=>{
-                let res = result.result
+                let res = result.data
                 this.posts = res
                 
                 this.posts.forEach(post=>{
@@ -82,7 +83,6 @@ export default {
                     post[date] = time
                 })
             })
-            
             console.log( this.posts.content )
         }
     },

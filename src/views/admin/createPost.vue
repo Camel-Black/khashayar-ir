@@ -31,7 +31,7 @@
                           </div>
                         </div>
                       </form>
-                      <div class="content-holder" v-html="content"></div>
+                      <div  class="content-holder justify-content-right" v-html="content"></div>
                       {{content}}
                       <vue-editor v-model="content" class="marginb"  />
                       <form>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <Footer></Footer>
+        <Ooter></Ooter>
       </div>
       
   </div>
@@ -72,7 +72,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import Footer from '../../components/footer'
+import Ooter from '../../components/footer'
 import sideBar from '../../components/dashboard/sideBar'
 //import TextEditor from '../../components/dashboard/texteditor'
 //import { mapGetters } from 'vuex'
@@ -85,7 +85,7 @@ export default {
   components:{
   //  TextEditor,
     sideBar,
-    Footer,
+    Ooter,
     VueEditor
   },
   data(){
@@ -95,7 +95,7 @@ export default {
       title:"",
       file:"",
       content:"",
-      value:["Technology"],
+      value:["تکنولوژی"],
       options: [
         { value: null, text: 'Categories' , disabled: true  }
       ],
@@ -116,6 +116,7 @@ export default {
       formData.append('author', decode)
       console.log(this.selected)
       formData.append('category',this.selected)
+      
       formData.append('tags',this.value)
       formData.append('slug',this.slug)
 
@@ -162,6 +163,9 @@ export default {
             }).catch(err=>{
                 Swal.fire('ERROR',`${err}`,'error')
             })
+    },
+    cancel(){
+      this.$router.push('/admin/dashboard/posts')
     }
   },
   created(){

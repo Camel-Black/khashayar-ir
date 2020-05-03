@@ -40,8 +40,10 @@ module.exports = {
         })
     },
     findByTag: async function(tag,cb){
+        console.log(tag)
         await post.find({tags: tag})
             .then(data=>{
+                console.log(data)
                 cb(null,data)
             })
             .catch(err=>{

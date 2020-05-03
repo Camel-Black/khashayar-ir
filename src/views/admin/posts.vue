@@ -29,7 +29,7 @@
                                     <div class="card-body">
                                         <h4 class="d-inline card-title">{{post.title}}</h4>
                                         <p class="d-inline ml-3" style="color:grey">{{post.date}}</p>
-                                        <p class="card-text"><p class="cut" v-html="post.content.substring(1,post.content.length-1)"></p>
+                                        <p class="card-text"><p class="cut" v-html="post.content"></p>
                                         <span class="badge badge-light d-block"
                                             style="width: 113px;margin-bottom: 9px;">{{post.author}}</span>
                                         <div class="btn-group" role="group">
@@ -106,16 +106,17 @@ export default {
     methods:{
         getPosts: function () {
             fetch('http://localhost:3000/api/posts/all')
-            .then(data=>{
-                console.log(data)
-                return data.json()
+            .then(res=>{
+                console.log(res)
+                return res.json()
             })
             .then(result=>{
                 let res = result.result
                 this.posts = res
                 
                 this.posts.forEach(post=>{
-                    let time = moment.unix(post.timestamp).startOf('hour').fromNow()
+                    moment.locale("fa");
+                    let time = moment.unix(post.timestamp).startOf('minute').fromNow()
                     let date = "date"
                     post[date] = time
                     

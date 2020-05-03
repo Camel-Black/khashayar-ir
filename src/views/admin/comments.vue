@@ -13,6 +13,9 @@
                 <div class="row" style="margin: 0px;">
                     <div class="col" style="padding: 0px;">
                         <h2 class="display-4" style="margin: 0px;margin-bottom: 26px;font-size: 56px;font-weight: bold;">comments</h2>
+                        <div v-if="comments.length == 0" class="d-flex justify-content-center">
+                            <h3 style="color:grey">Comment not Found</h3>
+                        </div>
                         <div class="row" v-for="content in comments" :key="content._id">
                             <div class="col-6">
                                 <div class="card">
@@ -24,13 +27,14 @@
                                                     <div class="media-body">
                                                         <div class="media" style="overflow:visible;">
                                                             <div></div>
-                                                            
                                                             <div class="media-body" style="overflow:visible;">
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <p><a href="#">{{content.name}}</a> {{content.content}} <br>
                                                                             <small class="text-muted">August 6, 2016 @ 10:35am </small>
+                                                                            
                                                                         </p>
+                                                                        <p>post id : {{content.postId}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>

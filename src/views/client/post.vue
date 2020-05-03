@@ -18,23 +18,27 @@
                 </div>
                 <div class="row">
                     <div class="col text-right d-flex justify-content-end ss qq">
-                        
                         <p style="font-family: Sahel" v-html="post[0].content"></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col d-flex ss">
-                        <p class="float-left justify-content-end" style="position: absolute;right: 7vw;color:grey;font-size:15px;"> نویسنده: خشایار مافی</p>
-                        <p style="color:grey;font-size:15px;">دوروز پیش</p>
+                    <div class="col d-flex ss" >
+                        <p class="float-left justify-content-end" style="position: absolute;right: 7vw;color:grey;font-size:10px;"><strong>{{post[0].author}}</strong> :نویسنده </p>
+                        <p style="color:grey;font-size:10px;">{{time}}</p>
                     </div>
                 </div>
                 <div class="row ss mobile">
-                    <div class="col d-flex justify-content-end align-items-start" style="height: 2vw;">
-                        <span class="badge badge-primary" style="background-color: #f8339e;">شومبول طلا</span>
+                    
+                    <div class="col d-flex justify-content-end align-items-start" >
+                        <div v-for="tag in post[0].tags" :key="tag">
+                        <div @click="redirect(tag)" style="height: 2vw;display:inline;margin-left:.75vmax">
+                            <span class="badge badge-primary" style="background-color: #f8339e;cursor:pointer">{{tag}}</span>
+                        </div>
+                        </div>
                     </div>
                 </div>
                 <!-- comments -->
-                {{comments}}
+                
                 <div v-for="comment in comments" :key="comment._id">
                     <div class="ss" style="margin-bottom:2vw">
                         <div class="col round" style="padding: 0px;background-color: #ffffff; padding: 0.2vw 2vw">
@@ -47,7 +51,7 @@
                                     <p><br />{{comment.content}}<br /><br /></p>
                                 </div>
                                 <div>
-                                    <p class="d-flex" style="color: rgb(248,51,158);font-family: Sahel;font-weight: bold;">پاسخ</p>
+                                    <!-- <p class="d-flex" style="color: rgb(248,51,158);font-family: Sahel;font-weight: bold;">پاسخ</p> -->
                                 </div>
                             </div>
                         </div>
@@ -65,16 +69,16 @@
                                 <div>
                                     <div class="form-group " style="margin: 0px;">
                                         <div class="row text-right " style="margin: 0px; margin-bottom:2vw">
-                                            <div class="col d-flex justify-content-center  " style="padding: 0px;">
-                                                <input type="text" v-model="email" class="form-control" style="width: 20vw;height:2vw" placeholder="ایمیل" />
+                                            <div class="col d-flex justify-content-center  " style="padding-right:1vmax;">
+                                                <input type="text" v-model="email" class="form-control"  placeholder="ایمیل" />
                                             </div>
-                                            <div class="col d-flex justify-content-center" style="width: auto;padding: 0px;">
-                                                <input type="text" v-model="name" class="d-flex justify-content-end form-control" style="width: 20vw;height:2vw" placeholder="نام"  />
+                                            <div class="col d-flex justify-content-center" style="width: auto;padding-left:1vmax;">
+                                                <input type="text" v-model="name" class="d-flex justify-content-end form-control"  placeholder="نام"  />
                                             </div>
                                         </div>
                                         <div class="row" style="margin: 0px;">
                                             <div class="col d-flex justify-content-center" style="padding: 0px;">
-                                                <textarea type="text" v-model="content" style="height: 20vmax;width: 50vw;padding:2vw;" class="d-flex justify-content-start form-control" placeholder=" نظر خود را بنویسید " ></textarea>
+                                                <textarea type="text" v-model="content" style="height: 20vmax;padding:2vw;" class="d-flex justify-content-start form-control" placeholder=" نظر خود را بنویسید " ></textarea>
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -129,6 +133,7 @@
 <script>
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import moment from 'moment'
 
 export default {
     data(){
@@ -138,11 +143,13 @@ export default {
             comments:[],
             name:"",
             email:"",
-            content:""
+            content:"",
+            time: ""
         }
     },
     methods:{
         getSinglePost(){
+            
             var title = this.$route.params.postName
             fetch(`http://localhost:3000/api/posts/${title}`)
             .then(data =>{
@@ -150,6 +157,8 @@ export default {
             })
             .then(json =>{ 
                 this.post = json
+                    moment.locale("fa");
+                    this.time = moment.unix(this.post[0].timestamp).startOf('minute').fromNow()
             })
             .then(()=>{
                 
@@ -171,7 +180,7 @@ export default {
                 email: this.email,
                 content: this.content
             })
-                .then(data=>{
+                .then(()=>{
                     Swal.fire({
                         title: 'با موفقیت ثبت شد',
                         text:'نظر برای تایید به ادمین ارسال شد',
@@ -184,6 +193,9 @@ export default {
                     console.log(error)
                 })
         },
+        redirect(tag){
+            this.$router.push(`/posts/tag/${tag}`)
+        }
 
     },
     created(){
@@ -357,6 +369,7 @@ input{
     border: none;
     text-align: right !important;
     padding: 1vw 2vw;
+    font-size: 15px;
 }
 input:active{
     border: none;
@@ -397,4 +410,36 @@ button{
     font-weight: bold;
 }
 
-</style>>
+p >>> strong{
+    font-family: Sahel !important;
+}
+p >>> a{
+    font-family: Sahel !important;
+    color: #55628d !important;
+}
+p >>> a:hover{
+    font-family: Sahel !important;
+    color: #abb3cf !important;
+}
+p >>> h1{
+    font-family: Sahel !important;
+}
+p >>> h2{
+    font-family: Sahel !important;
+}
+p >>> h3{
+    font-family: Sahel !important;
+}
+p >>> h4{
+    font-family: Sahel !important;
+}
+p >>> h5{
+    font-family: Sahel !important;
+}
+p >>> h6{
+    font-family: Sahel !important;
+}
+p >>> span{
+    font-family: Sahel !important;
+}
+</style>

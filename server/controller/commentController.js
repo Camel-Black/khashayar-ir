@@ -94,5 +94,21 @@ module.exports = {
         .catch(err=>{
             cb(err,{'message':'err happen in get all comments from single post'})
         })
+    },
+    deletManyById: async function(array,cb){ //id arrays
+        console.log("inja")
+        await commentSchema.deleteMany({
+            _id:{
+                $in: array
+            }
+        })
+            .then(data=>{
+                console.log("akdhsj")
+                cb(false,`comments of post succefully deleted  ||| result: ${data}`)
+            })
+            .catch(err=>{
+                console.log("sss")
+                cb(true,`err acurred comments of post delete  ||| result: ${err}`)
+            })
     }
 }
