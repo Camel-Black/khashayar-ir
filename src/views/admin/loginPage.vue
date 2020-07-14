@@ -2,13 +2,16 @@
   <div>
     <div class="register-photo">
         <div class="form-container">
-            <div class="image-holder"><img src="https://www.instagram.com/p/B-mhEInFotA/?utm_source=ig_web_copy_link" alt=""></div>
+            <div class="image-holder"><img src="https://www.instagram.com/p/B-mhEInFotA/?utm_source=ig_web_copy_link" alt=":\"></div>
             <form >
-                <h2 class="text-center"><strong>Khashayar.ir</strong></h2>
-                <div class="form-group"><input class="form-control" type="username" name="username" placeholder="Username" v-model="login.username">
+                <div class="text-center"><h1>Khashayar.ir</h1>
+                  <p style="color:grey">my first personal blog</p>
+                </div>
+                
+                <div style="color:grey" class="form-group"><input class="form-control" type="username" name="username" placeholder="Username" v-model="login.username">
                   <p class="alert">{{usernameMsg}}</p>
                 </div>
-                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" v-model="login.password">
+                <div style="color:grey" class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" v-model="login.password">
                 <p class="alert">{{passwordMsg}}</p>
                 </div>
 

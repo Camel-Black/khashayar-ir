@@ -1,0 +1,69 @@
+
+.s{
+    
+    font-size: 25px;
+    font-family: Sahel;
+    margin-right: 0.5vmax;
+}
+.un:after {
+    content: '';
+    width: 0px;
+    height: 2px;
+    display: block;
+    background: white;
+    transition: 300ms;
+  
+}
+h6{
+    color: #8175c7 !important;font-family: Sahel !important; font-size: 1vmax !important;
+}
+.icon{
+    font-size: 1vw !important ;
+}
+.footer{
+    margin-top: 1vmax;
+}
+.un:hover:after {
+  width: 100%;
+}
+.un {
+    margin-bottom: 1.5vw;
+}
+.icc{
+    color: #e2935c !important;
+}
+.icc:hover{
+    color: #d46f27 !important;
+}
+@media screen and (max-width: 800px) {
+
+    img{
+        width: 100px !important;
+        height:100px !important;
+    }
+    .s{
+        font-size: 15px;
+    }
+    #navvv{
+        margin-top: 5vmax !important;
+        
+    }
+    .icon{
+        font-size: 2vmax !important;
+    }
+    h6{
+        font-size: 10px !important;
+    }
+    .ml-3{
+        font-size: 15px !important;
+    }
+    #p{
+        font-size: 10px !important;
+    }
+    #strong{
+        font-size: 10px !important;
+    }
+    .footer{
+        margin-top: 5vmax !important;
+    }
+}

@@ -79,11 +79,11 @@
         <div class="row sidebar" style="margin: 0px;margin-top: 2vw;">
             <div class="col" style="padding-right:3.5vw">
                 <ul class="text-right" style="list-style-type: none;">
-                    <li class="list-item un"><a href="/" style="color: rgb(255,255,255);font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">خانه</a><i class="fa fa-home" style="font-size: 1vw;"></i></li>
-                    <li class="list-item un"><a href="/services" style="color: white ;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">خدمات</a><i class="fa fa-suitcase" style="font-size: 1vw;"></i></li>
-                    <li class="list-item un"><a href="/resume" style="color: white;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 1vw;"></i></li>
-                    <li class="list-item active un"><a href="/aboutme" style="color: #e2935c;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">درباره من</a><i class="fa fa-user" style="font-size: 1vw;"></i></li>
-                    <li class="list-item un"><a href="/blog" style="color: rgb(255,255,255);font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
+                    <li class="list-item un"><a class="s" href="/" >خانه</a><i class="fa fa-home" style="font-size: 1vw;"></i></li>
+                    <li class="list-item un"><a class="s" href="/services" >خدمات</a><i class="fa fa-suitcase" style="font-size: 1vw;"></i></li>
+                    <li class="list-item un"><a class="s" href="/resume" >نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 1vw;"></i></li>
+                    <li class="list-item active un"><a class="s" href="/aboutme" >درباره من</a><i class="fa fa-user" style="font-size: 1vw;"></i></li>
+                    <li class="list-item un"><a class="s" href="/blog" >بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
                 </ul>
             </div>
         </div>
@@ -115,6 +115,8 @@ export default {
 @import url('../../../bootstrap/assets/css/styless-client.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css');
 @import url('../../assets/fonts/sahel/sahel-font.css');
+@import url('../../assets/css/sidebar-client.css');
+
 .service-items{
     margin-right: 2.5vw;margin-top: 1vw;
     position:relative
@@ -151,33 +153,7 @@ export default {
     background: rgb(54,3,188);
     background: linear-gradient(145deg, rgba(54,3,188,1) 0%, rgba(8,4,81,1) 62%);
 }
-.un {
-    margin-bottom: 1.5vw;
-}
-.active.un{
-    color: #e2935c
-}
-.active.un::after{
-    color: #e2935c !important;
-    background: #e2935c !important;
-}
-.un:after {
-    color: rgb(255,255,255);
-    font-size: 1.5vw;
-    font-family: Sahel;
-    margin-right: 0.5vw;
-    content: '';
-    width: 0px;
-    height: 2px;
-    display: block;
-    background: white;
-    transition: 300ms;
-  
-}
 
-.un:hover:after {
-  width: 100%;
-}
 .header{
     font-family: Sahel !important;
 

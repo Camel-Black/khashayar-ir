@@ -37,7 +37,7 @@
                         <li class="list-item un"><a href="/services" style="color: #3503BA ;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">خدمات</a><i class="fa fa-suitcase" style="font-size: 1vw;color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/resume" style="color: #3503BA;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 1vw;color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">درباره من</a><i class="fa fa-user" style="font-size: 1vw;color:#3503BA"></i></li>
-                        <li class="list-item active un"><a href="/blog" style="color: #e2935c;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
+                        <li class="list-item active un"><a href="/blog" style="color: #e2935c;font-size: 25px;font-family: Sahel;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
                     </ul>
                 </div>
             </div>

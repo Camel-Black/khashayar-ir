@@ -18,10 +18,19 @@ const DEFAULT_TITLE = 'Khashayar Mafi || خشایار مافی';
 import comments from '../views/admin/comments'
 import NProgress from 'nprogress';
 import tag from '../views/client/postByTag.vue'
+import users from '../views/admin/users.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: "/admin/dashboard/users",
+    name: 'Users',
+    component: users,
+    meta:{
+      requiresAuth : true
+    }
+  },
   {
     path:'/posts/tag/:tag',
     name:'postByTag',

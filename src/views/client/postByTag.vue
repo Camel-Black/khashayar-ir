@@ -21,6 +21,9 @@
             </div>
         </div>
     <!-- side bar part -->
+        <div @click="collapseSide" class="sandwich d-block d-sm-none  d-sm-block   d-md-block d-lg-none animated fadeInDown delay1s">
+        <a href="#"><i class="fa fa-bars" style="color: white;" ></i></a>
+    </div>
         <div class="col-lg-2 col-xl-2  d-none d-sm-none  d-md-none d-lg-block shadow-3 shadow-lg" id="sidebar" style="padding: 0px;/*background-color: initial;*//*background-size: cover;*/backgorund:white;min-height: 95vh;float:right">
             <div class="row sidebar" style="margin: 0px;">
                 <div class="col text-center d-inline d-lg-flex justify-content-lg-center justify-content-center" style="margin-bottom: 32px;margin-top: 30px;"><img class="rounded-circle d-flex" src="../../assets/images/Color-transfer(1).jpg" style="width: 10vw;height: 10vw;" /></div>
