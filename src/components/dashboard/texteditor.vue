@@ -23,11 +23,11 @@ export default {
 </script>
 
 <style>
-@import url('../../assets/fonts/sahel/sahel-font.css');
+/* @import url('../../assets/fonts/sahel/sahel-font.css'); */
 
 
-p{
-    font-family: Sahel !important;
+p,h1,h2,h3,h4,h5,h6{
+    font-family: Anjoman-FaNum !important;
 }
 
 </style>

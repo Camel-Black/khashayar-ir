@@ -2,7 +2,7 @@
 .s{
     
     font-size: 25px;
-    font-family: Sahel;
+    font-family: 'Anjoman-FaNum';
     margin-right: 0.5vmax;
 }
 .un:after {
@@ -15,7 +15,7 @@
   
 }
 h6{
-    color: #8175c7 !important;font-family: Sahel !important; font-size: 1vmax !important;
+    color: #8175c7 !important;font-family: dana !important; font-size: 1vmax !important;
 }
 .icon{
     font-size: 1vw !important ;

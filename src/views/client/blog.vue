@@ -7,11 +7,11 @@
                     <div class="shadow-lg dafs" :style="{'background-image':`url(${require('@/static/'+post.image)})`,'position':'relative'}">
                         <div class="text-right justify-content-start align-items-end align-content-center service-items">
                             <div id="postHeader" class="col-6 text-right justify-content-start align-items-end align-content-center ">
-                                <h1  class="d-block align-items-start break-long-words" style="word-wrap: break-word !important;color: rgb(255,255,255);font-family: Sahel;font-weight: bold;font-size: 1.5vw">{{post.title}}</h1>
+                                <h1  class="d-block align-items-start break-long-words" style="word-wrap: break-word !important;color: rgb(255,255,255);font-family: Anjoman-FaNum;font-weight: bold;font-size: 1.5vw">{{post.title}}</h1>
                             </div>
                         </div>
                         <div class="chips d-flex justify-content-center align-items-center curs">
-                            <p @click="$router.push('/blog/'+post.slug)" class="d-flex justify-content-center align-items-center" style="font-family: Sahel;color: rgb(255,255,255);font-size: .60vw;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;">
+                            <p @click="$router.push('/blog/'+post.slug)" class="d-flex justify-content-center align-items-center" style="font-family: Anjoman-FaNum;color: rgb(255,255,255);font-size: .60vw;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;">
                                     بیشتر
                             </p>
                         </div>
@@ -26,18 +26,18 @@
             </div>
             <div class="row sidebar" style="margin: 0px;">
                 <div class="col">
-                    <h1 class="text-center h1" style="font-family: Sahel;font-weight: bold;color: #3503BA;font-size: 2vw;">خشایار مافی</h1>
-                    <h6 class="text-center" style="color: #8175c7;font-family: Sahel; font-size: 1vw;">برنامه نویس جاوا اسکریپت و پایتون</h6>
+                    <h1 class="text-center h1" style="font-family: Anjoman-FaNum;font-weight: bold;color: #3503BA;font-size: 2vw;">خشایار مافی</h1>
+                    <h6 class="text-center" style="color: #8175c7;font-family: Anjoman-FaNum; font-size: 1vw;">برنامه نویس جاوا اسکریپت و پایتون</h6>
                 </div>
             </div>
             <div class="row sidebar" style="margin: 0px;margin-top: 2vw;">
                 <div class="col" style="padding-right:3.5vw">
                     <ul class="text-right" style="list-style-type: none;">
-                        <li class="list-item un"><a href="/" style="color: #3503BA;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">خانه</a><i class="fa fa-home" style="font-size: 1vw; color:#3503BA"></i></li>
-                        <li class="list-item un"><a href="/services" style="color: #3503BA ;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">خدمات</a><i class="fa fa-suitcase" style="font-size: 1vw;color:#3503BA"></i></li>
-                        <li class="list-item un"><a href="/resume" style="color: #3503BA;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 1vw;color:#3503BA"></i></li>
-                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 1.5vw;font-family: Sahel;margin-right: 0.5vw;">درباره من</a><i class="fa fa-user" style="font-size: 1vw;color:#3503BA"></i></li>
-                        <li class="list-item active un"><a href="/blog" style="color: #e2935c;font-size: 25px;font-family: Sahel;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
+                        <li class="list-item un"><a href="/" style="color: #3503BA;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خانه</a><i class="fa fa-home" style="font-size: 1vw; color:#3503BA"></i></li>
+                        <li class="list-item un"><a href="/services" style="color: #3503BA ;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خدمات</a><i class="fa fa-suitcase" style="font-size: 1vw;color:#3503BA"></i></li>
+                        <li class="list-item un"><a href="/resume" style="color: #3503BA;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 1vw;color:#3503BA"></i></li>
+                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">درباره من</a><i class="fa fa-user" style="font-size: 1vw;color:#3503BA"></i></li>
+                        <li class="list-item active un"><a href="/blog" style="color: #e2935c;font-size: 25px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
                     </ul>
                 </div>
             </div>
@@ -45,8 +45,8 @@
                 style="margin: 0px;bottom:1px;position : absolute">
                 <div class="col text-center float-right sidebar" style="padding: 0px;font-size: 1.2vw;color:#F8359E"><i class="fa fa-twitter ml-3"></i><i class="fa fa-telegram ml-3"></i><i class="fa fa-github ml-3"></i><i class="fa fa-instagram ml-3"></i>
                     <div>
-                        <p class="text-center d-inline" style="margin: 0px;font-family: Sahel;color: grey;font-size: 0.75vw;">طراحی و توسعه
-                        <span class="text-center d-inline" style="margin: 0px;font-family: Sahel;color: black;font-weight: 900;font-size: 0.75vw;">خشایار مافی</span></p>
+                        <p class="text-center d-inline" style="margin: 0px;font-family: Anjoman-FaNum;color: grey;font-size: 0.75vw;">طراحی و توسعه
+                        <span class="text-center d-inline" style="margin: 0px;font-family: 'Anjoman-FaNum';color: black;font-weight: 900;font-size: 0.75vw;">خشایار مافی</span></p>
                         
                     </div>
                 </div>
@@ -94,7 +94,6 @@ export default {
 <style scoped>
 @import url('../../../bootstrap/assets/css/styless-client.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css');
-@import url('../../assets/fonts/sahel/sahel-font.css');
 .service-items{
     margin-right: 2.5vw;margin-top: 1vw;
     position:relative
@@ -148,7 +147,7 @@ export default {
 .un:after {
     color: #3503BA !important;
     font-size: 1.5vw;
-    font-family: Sahel;
+    font-family: 'Anjoman-FaNum';
     margin-right: 0.5vw;
     content: '';
     width: 0px;
@@ -163,7 +162,7 @@ export default {
   width: 100%;
 }
 .header{
-    font-family: Sahel !important;
+    font-family: 'Anjoman-FaNum' !important;
 
     color: #3503BA !important;
     bottom: 9vw;

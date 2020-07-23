@@ -1,6 +1,5 @@
 <template>
-  <div>
-    
+  <div style="font-family: Anjoman-FaNum">
       <div id="wrapper">
         <sideBar></sideBar>
         <div class="page-content-wrapper"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-reorder"></i></a>
@@ -176,7 +175,7 @@ export default {
 
 <style>
 
-@import url('../../assets/fonts/sahel/sahel-font.css');
+
 .input[type="file"] {
     display: none !important;
 }

@@ -143,7 +143,7 @@ const routes = [
     component: notFound
   },
   {
-    path:"/admin/login",
+    path:"/login",
     name:"adminPage",
     component: alogin
   }

@@ -11,7 +11,7 @@
                             </div>
                         </div>
                         <div class="chips d-flex justify-content-center align-items-center curs">
-                            <p @click="$router.push('/blog/'+post.slug)" class="d-flex justify-content-center align-items-center" style="font-family: Sahel;color: rgb(255,255,255);font-size: .60vw;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;">
+                            <p @click="go(post.slug)" class="d-flex justify-content-center align-items-center" style="font-family: Sahel;color: rgb(255,255,255);font-size: .60vw;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;">
                                     بیشتر
                             </p>
                         </div>
@@ -87,6 +87,11 @@ export default {
                 })
             })
             console.log( this.posts.content )
+        },
+        go: function(slug){
+            console.log("this is slog",slug)
+            this.$route.push('/blog/'+slug)
+            
         }
     },
     created(){

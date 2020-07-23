@@ -25,7 +25,7 @@ export default {
   methods:{
     logUserOut:function(){
     localStorage.removeItem('jwt')
-    this.$router.push("/admin/login")
+    this.$router.push("/login")
     },
     comments(){
             var token = localStorage.getItem('jwt')

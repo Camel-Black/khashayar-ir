@@ -18,7 +18,9 @@
   background: linear-gradient(122deg, rgba(82,21,156,1) 0%, rgba(48,7,147,1) 74%) !important;
 
 }
-
+.image-header{
+  height: 90vw;
+}
 .break-long-words {
   overflow-wrap: break-word;
   word-wrap: break-word;
