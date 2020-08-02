@@ -33,7 +33,7 @@
                                         <span class="badge badge-light d-block"
                                             style="width: 113px;margin-bottom: 9px;">{{post.author}}</span>
                                         <div class="btn-group" role="group">
-                                            <b-button class="btn btn-dark" type="submit" style="margin: 0px;" v-bind:href="'/admin/post/edit/'+post._id">
+                                            <b-button class="btn btn-dark" type="submit" style="margin: 0px;" v-bind:href="'/admin/post/edit/'+post.slug">
                                                 <vue-fontawesome icon="pencil" size="1" color="dark"></vue-fontawesome>
                                             </b-button>
                                             <button class="btn btn-warning" type="button" style="margin: 0px;" @click="deletePost(post._id)">

@@ -31,7 +31,7 @@
                           </div>
                         </div>
                       </form>
-                      <TextEditor class="marginb"></TextEditor>
+                      <TextEditor class="marginb" :content="text"></TextEditor>
                       <form>
                         <div class="form-row">
                           <div class="col">
@@ -78,7 +78,7 @@ import jsonwebtoken from 'vue-jwt-decode'
 import Swal from 'sweetalert2'
 
 export default {
-  name:"creatPost",
+  name:"editpost",
   components:{
     TextEditor,
     sideBar,
@@ -89,12 +89,14 @@ export default {
       select:"",
       title:"",
       file:"",
+      text:"",
       value:["Technology"],
       options: [
         { value: null, text: 'Categories' , disabled: true  }
       ],
       selected: null,
-      postId: this.$route.params.postid
+      postId: this.$route.params.postid,
+      post:{}
     }
   },
   methods:{
@@ -136,6 +138,25 @@ export default {
         console.log(err)
       })
     },
+      getSinglePost(){
+            
+            var title = this.$route.params.postName
+            fetch(`http://localhost:3000/api/posts/${title}`)
+            .then(data =>{
+                return data.json()
+            })
+            .then(json =>{ 
+                this.post = json
+                    // moment.locale("fa");
+                    // this.time = moment.unix(this.post[0].timestamp).startOf('minute').fromNow()
+                              this.title = this.post.title
+          this.selected = this.post.category
+          this.text = this.post.content
+          
+            })
+        console.log(this.post)
+
+        },
     getCategories: function(){
         fetch('http://localhost:3000/api/posts/all/category')
             .then(data=>{
@@ -144,7 +165,7 @@ export default {
             .then(json=>{
               
                 json.result.forEach(cate => {
-                  console.log(cate)
+                  
                     let option = {
                         text: cate.name,
                         value: cate.name
@@ -162,6 +183,7 @@ export default {
   },
   created(){
     this.getCategories()
+    this.getSinglePost()
   }
 }
 </script>

@@ -1,6 +1,7 @@
 <template>
     <div :class="sidebarclasses" id="sidebar" style="padding: 0px;/*background-color: initial;*//*background-size: cover;*/background: rgb(11,4,84);background: linear-gradient(132deg, rgb(11,4,84) 0%, rgb(6, 5, 75) 100%);/*bottom: 0px;*//*top: 0px;*//*position: absolute;*//*right: 0px;*/min-height: 95vh;/*max-height: 60px;*/float:right">
         <div id="content">
+            
             <div class="row sidebar" style="margin: 0px;">
                 <div class="col text-center d-inline d-flex justify-content-center justify-content-center" style="margin-bottom: 3vmax;margin-top: 30px;"><img class="rounded-circle d-flex" src="../../assets/images/orang.jpg" style="width: 10vw;height: 10vw;" /></div>
             </div>
@@ -13,6 +14,7 @@
             <div class="row sidebar" id="navvv" style="margin: 0px;margin-top: 2vw;">
                 <div class="col" style="padding-right:3.5vw">
                     <ul class="text-right" style="list-style-type: none;">
+                        
                         <li class="list-item un"><a class="s" :href="href.home" >خانه</a><i class="fa fa-home icon" ></i></li>
                         <li ref="services" class="list-item un" id="Services"><a ref="servicesa" class="s" :href="href.services" >خدمات</a><i class="fa fa-suitcase icon" ></i></li>
                         <li class="list-item un"><a class="s sss" :href="href.resume" >نمونه کارها</a><i class="fa fa-check-circle-o icon" ></i></li>
@@ -43,6 +45,7 @@ export default {
         return{
             href:{
                 home: '/',
+                message: 'شتم',
                 services: '/Services',
                 resume: '/Resume',
                 aboutme: '/Aboutme',
@@ -52,16 +55,22 @@ export default {
         }
     },
     methods:{
-        checkRoute(){
-            var route = this.$router.currentRoute
-            // this.$refs.services.className
-            console.log(this.$refs.services.style)
+        click(value){
+            this.href.message = "asd"
+            if(value === 0){
+                this.message = "out"
+            }
+        // },
+        // checkRoute(){
+        //     var route = this.$router.currentRoute
+        //     // this.$refs.services.className
+        //     console.log(this.$refs.services.style)
 
 
             
-            // if(route.name == this.$refs.services.id){
+        //     // if(route.name == this.$refs.services.id){
                 
-            // }
+        //     // }
             
         }
     },
@@ -76,4 +85,5 @@ export default {
 .white{
     color: white !important;
 }
+
 </style>

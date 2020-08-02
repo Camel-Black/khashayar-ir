@@ -6,8 +6,8 @@
             <div class="postContainer text-center">
                 <div class="row">
                     <div class="col" >
-                        <div class="image-header">
-                            <img :src="require('../../static/'+post[0].image)" class="img-fluid" style="height:40%" alt="">
+                        <div>
+                            <img :src="require('../../static/'+post[0].image)" class="postimage" style="width:100%;" alt="">
                         </div>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-right d-flex justify-content-end ss qq">
-                        <p style="font-family: Anjoman-FaNum" v-html="post[0].content"></p>
+                        <p style="font-family: Anjoman-FaNum;direction:rtl" v-html="post[0].content"></p>
                     </div>
                 </div>
                 <div class="row">
@@ -37,9 +37,11 @@
                         </div>
                     </div>
                 </div>
+                <hr/>
                 <!-- comments -->
                 
-                <div v-for="comment in comments" :key="comment._id">
+                <div v-for="comment in comments" :key="comment._id" style="margin-top:2vh">
+                    {{comment}}
                     <div class="ss" style="margin-bottom:2vw">
                         <div class="col round" style="padding: 0px;background-color: #ffffff; padding: 0.2vw 2vw">
                             <div>
@@ -57,7 +59,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                
+                <div class="row" style="margin-top: 2vh">
                     <div class="col">
                         <div class="row">
                             <div class="col">
@@ -81,6 +84,7 @@
                                                 <textarea type="text" v-model="content" style="height: 20vmax;padding:2vw;" class="d-flex justify-content-start form-control" placeholder=" نظر خود را بنویسید " ></textarea>
                                             </div>
                                         </div>
+                                        <VueHcaptcha @verify="onVerify" sitekey="d4daf2f1-0fe4-44cc-957f-0cdbf42ea0ae" style="border-radios: 5px;margin-top:2vh"></VueHcaptcha>
                                         <div class="row mt-2">
                                             <div class="col">
                                                 <button @click="sendCommnet" type="button" class="btn btn-light" style="margin:2vw"> ارسال</button>
@@ -137,7 +141,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import moment from 'moment'
-
+import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
 export default {
     data(){
         return{
@@ -147,9 +151,14 @@ export default {
             name:"",
             email:"",
             content:"",
-            time: ""
+            time: "",
+            verified: false
         }
     },
+    components: { 
+        VueHcaptcha
+        }
+    ,
     methods:{
         getSinglePost(){
             
@@ -162,6 +171,7 @@ export default {
                 this.post = json
                     moment.locale("fa");
                     this.time = moment.unix(this.post[0].timestamp).startOf('minute').fromNow()
+                    // console.log(this.post)
             })
             .then(()=>{
                 
@@ -174,6 +184,9 @@ export default {
                         console.log(err)
                     })
             })
+        },
+        onVerify(){
+            this.verified = true
         },
         sendCommnet(){
             let postid= this.post[0]._id
@@ -191,6 +204,9 @@ export default {
                         timer: 2200,
                         showConfirmButton: false,
                     })
+                })
+                .then(()=>{
+                    this.$router.go()
                 })
                 .catch(error=>{
                     console.log(error)
@@ -372,6 +388,7 @@ input{
     text-align: right !important;
     padding: 1vw 2vw;
     font-size: 15px;
+    direction: rtl;
 }
 input:active{
     border: none;
@@ -383,6 +400,7 @@ input:active{
    /* overflow-wrap: break-word !important; */
    content: '\A';
    white-space:pre-line;
+   font-size: 1em;
 }
 
 form .form-control:focus{
@@ -398,6 +416,7 @@ textarea{
     padding-bottom:0.4em;
     padding-right: 0.4em;
     font-family: Anjoman-FaNum;
+    direction: rtl;
 }
 button{
 
@@ -443,5 +462,9 @@ p >>> h6{
 }
 p >>> span{
     font-family: Anjoman-FaNum !important;
+}
+.postimage{
+    min-width: 100% !important;
+    min-height: 30vh !important;
 }
 </style>

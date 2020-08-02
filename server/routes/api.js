@@ -3,7 +3,20 @@ const express= require('express')
 const router = express.Router()
 const postSchema = require("../db/schema/post")
 const path = require('path')
-const dashify = require('dashify')
+// const dashify = require('dashify')
+
+
+const dashify =  function (titleStr){
+    titleStr = titleStr.replace(/^\s+|\s+$/g, '');
+    titleStr = titleStr.toLowerCase();
+   //persian support
+    titleStr = titleStr.replace(/[^a-z0-9_\s-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]#u/, '') 
+    // Collapse whitespace and replace by -
+        .replace(/\s+/g, '-')
+        // Collapse dashes
+        .replace(/-+/g, '-');
+    return titleStr;       
+}
 const {auth } = require('./middleware')
 const categoryC = require('../controller/categoryConrtoller')
 const userC = require('../controller/userController')
@@ -23,7 +36,7 @@ const storage = multer.diskStorage({
     },
     
 })
-
+// TODO create auth for registration
 const upload =  multer({
     storage: storage,
     limits:{
@@ -188,7 +201,7 @@ router.post("/posts/new",upload.single('file'),(req,res)=>{
             content:  body.content,
             category: body.category,
             author:  body.author,
-            slug: dashify(body.slug),
+            slug: dashify(`${body.category} ${body.title}`),
             tags: tags,
             timestamp: tms
         } 

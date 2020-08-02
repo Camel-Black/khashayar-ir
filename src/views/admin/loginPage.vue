@@ -63,7 +63,7 @@ export default {
       })
       .then(token=>{
         localStorage.setItem("jwt", token);
-        this.$router.push("/admin/dashboard/home")
+        this.$router.push("/dashboard")
       })
       .catch(err=>{
         console.log(err)

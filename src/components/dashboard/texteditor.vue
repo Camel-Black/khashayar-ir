@@ -10,12 +10,7 @@
 import { VueEditor } from "vue2-editor";
 export default {
     name: 'textEditor',
-    data(){
-        return{
-            content:"",
-        // [{'font': [{'Sahel' : 'Sahel'}]}],
-        }
-    },
+        props: ['content'],
     components:{
         VueEditor
     }

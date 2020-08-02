@@ -64,48 +64,70 @@
                 </div>
             </div>
         </div>
+                <div @click="collapseSide" class="sandwich d-block d-sm-none  d-sm-block   d-md-block d-lg-none animated fadeInDown delay1s">
+        <a href="#"><i class="fa fa-bars" style="color: white;" ></i></a>
+    </div>
     </div>
     <!-- side bar part -->
-    <div class="col-lg-2 col-xl-2  d-none d-sm-none  d-md-none d-lg-block" id="sidebar" style="padding: 0px;/*background-color: initial;*//*background-size: cover;*/background: rgb(11,4,84);background: linear-gradient(132deg, rgb(11,4,84) 0%, rgb(6, 5, 75) 100%);/*bottom: 0px;*//*top: 0px;*//*position: absolute;*//*right: 0px;*/min-height: 95vh;/*max-height: 60px;*/float:right">
-        <div class="row sidebar" style="margin: 0px;">
-            <div class="col text-center d-inline d-lg-flex justify-content-lg-center justify-content-center" style="margin-bottom: 32px;margin-top: 30px;"><img class="rounded-circle d-flex" src="../../assets/images/Duotone_dtn16(1).jpg" style="width: 10vw;height: 10vw;" /></div>
-        </div>
-        <div class="row sidebar" style="margin: 0px;">
-            <div class="col">
-                <h1 class="text-center h1" style="font-family: Sahel;font-weight: bold;color: rgb(255,255,255);font-size: 2vw;">خشایار مافی</h1>
-                <h6 class="text-center" style="color: #8175c7;font-family: Sahel; font-size: 1vw;">برنامه نویس جاوا اسکریپت و پایتون</h6>
+
+            <div :class="sidebarclasses" id="sidebar" style="padding: 0px;/*background-color: initial;*//*background-size: cover;*/background: rgb(11,4,84);background: linear-gradient(132deg, rgb(11,4,84) 0%, rgb(6, 5, 75) 100%);/*bottom: 0px;*//*top: 0px;*//*position: absolute;*//*right: 0px;*/min-height: 95vh;/*max-height: 60px;*/float:right">
+            <div class="row sidebar" style="margin: 0px;">
+                <div class="col text-center d-inline d-flex justify-content-center justify-content-center" style="margin-bottom: 32px;margin-top: 30px;"><img class="rounded-circle d-flex" src="../../assets/images/orang.jpg" style="width: 10vw;height: 10vw;" /></div>
             </div>
-        </div>
-        <div class="row sidebar" style="margin: 0px;margin-top: 2vw;">
-            <div class="col" style="padding-right:3.5vw">
-                <ul class="text-right" style="list-style-type: none;">
-                    <li class="list-item un"><a class="s" href="/" >خانه</a><i class="fa fa-home" style="font-size: 1vw;"></i></li>
-                    <li class="list-item un"><a class="s" href="/services" >خدمات</a><i class="fa fa-suitcase" style="font-size: 1vw;"></i></li>
-                    <li class="list-item un"><a class="s" href="/resume" >نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 1vw;"></i></li>
-                    <li class="list-item active un"><a class="s" href="/aboutme" >درباره من</a><i class="fa fa-user" style="font-size: 1vw;"></i></li>
-                    <li class="list-item un"><a class="s" href="/blog" >بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
-                </ul>
+            <div class="row sidebar" style="margin: 0px;">
+                <div class="col">
+                    <h1 class="text-center h1" style="font-family: Anjoman-FaNum;font-weight: bold;color:white;font-size: 40px;">خشایار مافی</h1>
+                    <h6 class="text-center" style="color: #8175c7;font-family: Anjoman-FaNum; font-size: 20px;">برنامه نویس جاوا اسکریپت و پایتون</h6>
+                </div>
             </div>
-        </div>
-        <div class="col"
-            style="margin: 0px;bottom:1px;position : absolute">
-            <div class="col text-center float-right sidebar" style="padding: 0px;font-size: 1.2vw;color: #e2935c;"><i class="fa fa-twitter ml-3"></i><i class="fa fa-telegram ml-3"></i><i class="fa fa-github ml-3"></i><i class="fa fa-instagram ml-3"></i>
-                <div>
-                    <p class="text-center d-inline" style="margin: 0px;font-family: Sahel;color: rgb(244,244,244);font-size: 0.75vw;">طراحی و توسعه
-                    <span class="text-center d-inline" style="margin: 0px;font-family: Sahel;color: rgb(244,244,244);font-weight: 900;font-size: 0.75vw;">خشایار مافی</span></p>
-                    
+            <div class="row sidebar" style="margin: 0px;margin-top: 2vw;">
+                <div class="col" style="padding-right:3.5vw">
+                    <ul class="text-right" style="list-style-type: none;">
+                        <li class="list-item underline"><a href="/" class="ul-link-a" style="color: white;">خانه</a><i class="fa fa-home" style="font-size: 20px; white"></i></li>
+                        <li class="list-item underline"><a href="/services" class="ul-link-a" style="color: white;">خدمات</a><i class="fa fa-suitcase" style="font-size: 20px;white"></i></li>
+                        <li class="list-item underline"><a href="/resume" class="ul-link-a" style="color: white;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 20px;white"></i></li>
+                        <li class="list-item underline"><a href="/aboutme" class="ul-link-a" style="color: white;">درباره من</a><i class="fa fa-user" style="font-size: 20px;color:white"></i></li>
+                        <li class="list-item active underline" style="color:#e2935c"><a href="/blog" class="ul-link-a" style="color: #e2935c">بلاگ</a><i class="fa fa-quote-right icon " style=""></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col" style="bottom:1em;position:absolute">
+                <div class="col text-center float-right sidebar icon links" style="padding: 0px;color: #e2935c;text-align: center"><a class="icc" target="_blank" href="https://twitter.com/lanfositmostasl"><i class="fa fa-twitter ml-3"></i></a><a class="icc" target="_blank" href="https://t.me/kh_mfi"><i class="fa fa-telegram ml-3"></i></a><a class="icc" target="_blank" href="https://github.com/Camel-Black"><i class="fa fa-github ml-3"></i></a><a class="icc"  target="_blank" href="https://soundcloud.com/khashayar-mafi"><i class="fa fa-soundcloud ml-3"></i></a>
+                    <div>
+                        <p class="text-center d-inline" style="font-family: Anjoman-FaNum;color: rgb(244,244,244);font-size: 12px;">طراحی و توسعه
+                        <span class="text-center d-inline" style="font-family: 'Anjoman-FaNum';color: white;font-weight: 900;font-size: 12px;">خشایار مافی</span></p>
+                        
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 </template>
 
 <script>
 export default {
-    data(){
+    name:'aboutme',
+        data(){
         return{
+            sidebarclasses:"col-lg-2 col-xl-2  d-none d-sm-none  d-md-none d-lg-block",
+            contentClasses: "col-md-12 col-sm-12" ,
+            flag: false,
             contact: 'تماس'
+
+        }
+    },
+    methods:{
+        collapseSide(){
+            if(!this.flag){
+                this.sidebarclasses = "col-lg-2 col-xl-2 col-md-4 col-sm-5 col-5"
+                this.contentClasses = "col-md-8 col-sm-7 col-7"
+                this.flag = !this.flag
+            }
+            else{
+                this.sidebarclasses = "col-lg-2 col-xl-2  d-none d-sm-none  d-md-none d-lg-block"
+                this.contentClasses = "col-md-12 col-sm-12"
+                this.flag = !this.flag
+            }
         }
     }
 }
@@ -115,57 +137,5 @@ export default {
 @import url('../../../bootstrap/assets/css/styless-client.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css');
 @import url('../../assets/fonts/sahel/sahel-font.css');
-@import url('../../assets/css/sidebar-client.css');
 
-.service-items{
-    margin-right: 2.5vw;margin-top: 1vw;
-    position:relative
-}
-.curs{
-    cursor: pointer;
-}
-.chips{
-    height: 1.5vw;
-    width: 4vw;
-    bottom: 0vw;
-    position: absolute;
-    background-color: #f8359e;
-    left: 0px;
-    margin-bottom: 1vw;
-    margin-left: 2vw;
-    border-radius: 2vw;
-}
-.service{
-    margin: 1vw;
-    background: rgb(48,7,147);
-    background: linear-gradient(298deg, rgba(48,7,147,1) 0%, rgba(82,21,156,1) 62%);
-    width:25vw;
-    height: 21vw;
-    border-radius: 2vw ;
-
-}
-.back{
-    height: 100vh;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background: rgb(54,3,188);
-    background: linear-gradient(145deg, rgba(54,3,188,1) 0%, rgba(8,4,81,1) 62%);
-}
-
-.header{
-    font-family: Sahel !important;
-
-    color: white;
-    bottom: 9vw;
-    left: 2vw;
-    position: absolute;
-
-}
-.sandwich{
-    right: 3vw;
-    position: absolute;
-    top: 2vw;
-}
 </style>

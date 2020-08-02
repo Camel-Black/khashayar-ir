@@ -10,7 +10,7 @@
                         <div class="form-row">
                           <div class="col">
                             <div class="input-group flex-nowrap">
-                              <input type="text" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="addon-wrapping" v-model="title">
+                              <input type="text" class="form-control" style="direction:rtl" placeholder="Title" aria-label="Username" aria-describedby="addon-wrapping" v-model="title">
                             </div>
                           </div>
                           <div class="col">
@@ -19,20 +19,25 @@
                           <div class="col">
                             <b-form-file v-model="file" :state="Boolean(file)" ref="files" placeholder="Choose a file or drop it here..." drop-placeholder="Drop file here..."  >{{file}}
                             </b-form-file> 
-                          </div>
-                          <div class="col">
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <span  class="input-group-text" id="basic-addon3">khashayar.ir/posts/</span>
-                              </div>
-                              <input v-model="slug" type="text" placeholder="Enter the slug" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            <div v-if="parseFloat(file.size/1024).toFixed(2) < 1500">
+                              <p style="color:green">OK</p>
+                            </div>
+                            <div v-else>
+                              <p style="color:red">Over size</p>
                             </div>
                           </div>
                         </div>
+                        <div class="row">
+                          <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item active"   aria-current="page">http://khashayar.ir/blog/{{selected}}-{{dashify(title)}}</li>
+                            </ol>
+                          </nav>
+                          </div>
                       </form>
                       <div  class="content-holder justify-content-right" v-html="content"></div>
                       {{content}}
-                      <vue-editor v-model="content" class="marginb"  />
+                      <vue-editor v-model="content" class="marginb" style="direction:rtl" />
                       <form>
                         <div class="form-row">
                           <div class="col">
@@ -102,6 +107,18 @@ export default {
     }
   },
   methods:{
+    dashify : function(titleStr){
+    titleStr = titleStr.replace(/^\s+|\s+$/g, '');
+    titleStr = titleStr.toLowerCase();
+   //persian support
+    titleStr = titleStr.replace(/[^a-z0-9_\s-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]#u/, '') 
+    // Collapse whitespace and replace by -
+        .replace(/\s+/g, '-')
+        // Collapse dashes
+        .replace(/-+/g, '-');
+    return titleStr;       
+}
+    ,
     save:function(){
       var token= localStorage.getItem('jwt')
       var decode = jsonwebtoken.decode(token)

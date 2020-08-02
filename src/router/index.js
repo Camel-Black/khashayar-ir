@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Post from '../views/client/post.vue'
 import createPost from '../views/admin/createPost.vue'
 import dashboardHome from '../views/admin/dashboardHome.vue'
 import notFound from '../views/404.vue'
@@ -12,12 +11,10 @@ import categories from '../views/admin/categories.vue'
 import index from '../views/client/index.vue'
 import services from '../views/client/services.vue'
 import resume from '../views/client/resume.vue'
-import blog from '../views/client/blog.vue'
 import aboutme from '../views/client/aboutme.vue'
 const DEFAULT_TITLE = 'Khashayar Mafi || خشایار مافی';
 import comments from '../views/admin/comments'
 import NProgress from 'nprogress';
-import tag from '../views/client/postByTag.vue'
 import users from '../views/admin/users.vue'
 
 Vue.use(VueRouter)
@@ -34,7 +31,7 @@ const routes = [
   {
     path:'/posts/tag/:tag',
     name:'postByTag',
-    component:tag,
+    component:()=>import('../views/client/postByTag.vue'),
     meta:{
       title: 'جستو جو'
     }
@@ -58,7 +55,7 @@ const routes = [
   {
     path:'/blog',
     name:'Blog',
-    component:blog,
+    component:()=> import('../views/client/blog.vue'),
     meta:{
       title: 'بلاگ'
     }
@@ -111,7 +108,7 @@ const routes = [
   {
     path:'/blog/:postName',
     name:'Post',
-    component: Post
+    component: ()=>import('../views/client/post.vue')
   },
   {
     path:'/admin/posts/new',
@@ -122,7 +119,7 @@ const routes = [
     }
   },
   {
-    path:'/admin/dashboard/home',
+    path:'/dashboard',
     name:"Dashboard",
     component:dashboardHome,
     meta:{
@@ -130,7 +127,7 @@ const routes = [
     }
   },
   {
-    path:'/admin/post/edit/:postid',
+    path:'/admin/post/edit/:postName',
     name:'editPost',
     component: editPost,
     meta:{
