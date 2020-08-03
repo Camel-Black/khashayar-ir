@@ -25,6 +25,7 @@ const multer = require('multer')
 const categorySchema = require('../db/schema/category')
 const commentC = require('../controller/commentController')
 const postC = require('../controller/postController')
+const { json } = require('body-parser')
 
 const storage = multer.diskStorage({
     destination:function (req,file,cb) {
@@ -95,12 +96,13 @@ router.get("/posts/all",(req,res)=>{
 //get post by title
 router.get("/posts/:post",(req,res)=>{
     let rslug = req.params.post
-
+    console.log("this is slug",rslug)
     postSchema.find({slug: rslug}) 
 
     .then(post => {
         if(post){
             res.status(200).json(post)
+            console.log("this is post",post)
         }
         else{
             res.status(201).json(post)
@@ -155,7 +157,6 @@ router.post("/posts/update/:postId",auth,upload.single('file'),(req,res)=>{
     localTime = moment(localTime).format('YYYY-MM-DD HH:mm:ss');  
     var tms = moment(localTime).format("X");
     let img = req.file.filename
-    
     let body =  JSON.parse(JSON.stringify(req.body));
     console.log(body)
     try {
@@ -184,7 +185,7 @@ router.post("/posts/update/:postId",auth,upload.single('file'),(req,res)=>{
 })
 
 //create new post
-router.post("/posts/new",upload.single('file'),(req,res)=>{
+router.post("/posts/new",auth,upload.single('file'),(req,res)=>{
     console.log("kosse nanae noode")
     var localTime  = moment.utc().toDate();
     localTime = moment(localTime).format('YYYY-MM-DD HH:mm:ss');

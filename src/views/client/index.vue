@@ -35,7 +35,7 @@
                         <li class="list-item underline"><a href="/services" class="ul-link-a" style="color: white;">خدمات</a><i class="fa fa-suitcase" style="font-size: 20px;white"></i></li>
                         <li class="list-item underline"><a href="/resume" class="ul-link-a" style="color: white;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 20px;white"></i></li>
                         <li class="list-item underline"><a href="/aboutme" class="ul-link-a" style="color: white;">درباره من</a><i class="fa fa-user" style="font-size: 20px;color:white"></i></li>
-                        <li class="list-item active underline" style="color:#e2935c"><a href="/blog" class="ul-link-a" style="color: #e2935c">بلاگ</a><i class="fa fa-quote-right icon " style=""></i></li>
+                        <li class="list-item underline" ><a href="/blog" class="ul-link-a" style="color: white">بلاگ</a><i class="fa fa-quote-right icon " style=""></i></li>
                     </ul>
                 </div>
             </div>
@@ -86,7 +86,7 @@ export default {
 @import url('../../assets/css/sidebar-client.css');
 @import url('../../../bootstrap/assets/css/styless-client.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css');
-@import url('../../assets/fonts/sahel/sahel-font.css');
+/* @import url('../../assets/fonts/sahel/sahel-font.css'); */
 .header{
     /* font-family: Sahel !important; */
 

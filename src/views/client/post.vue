@@ -23,8 +23,8 @@
                 </div>
                 <div class="row">
                     <div class="col d-flex ss" >
-                        <p class="float-left justify-content-end" style="position: absolute;right: 7vw;color:grey;font-size:10px;"><strong>{{post[0].author}}</strong> :نویسنده </p>
-                        <p style="color:grey;font-size:10px;">{{time}}</p>
+                        <p class="float-left justify-content-end" style="position: absolute;right: 7vw;color:grey;font-size:12px;"><strong>{{post[0].author}}</strong> :نویسنده </p>
+                        <p style="color:grey;font-size:12px;">{{time}}</p>
                     </div>
                 </div>
                 <div class="row ss mobile">
@@ -367,7 +367,7 @@ img{
     padding-top: 2vw;
 }
 
-h1,h2,h3,h4,h5,span,input{
+h1,h2,h3,h4,h5,span,input,p{
     font-family: Anjoman-FaNum;
 }
 .qq{
