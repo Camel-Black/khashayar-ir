@@ -7,26 +7,19 @@
   background-position: center center;
 }
 
-/* .service{
-  margin: 1vw;
-  min-width: 150px;
-  min-height: 90px;
-  width:25vw;
-  height: 21vw;
-  border-radius: 2vw ;
-  background: rgb(82,21,156) !important;
-  background: linear-gradient(122deg, rgba(82,21,156,1) 0%, rgba(48,7,147,1) 74%) !important;
 
-} */
 .service{
   background-size: cover !important;
   background-repeat: no-repeat !important;
   
-  transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-  background-image: url('../../../src/assets/images/web-development-on-smartphone-and-laptop-screen-concept-application-ui-ux-development-cross-platform-vector.jpg') !important;
+  /* transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1); */
+  background-color: #272770;
+  opacity: 0.4;
+
 }
 .service:hover{
-  height: 50vw;
+  background-color: #ffffff;
+ 
 }
 .image-header{
   height: 100%;
@@ -75,13 +68,13 @@ a:hover{
 .list-item {
   color: rgb(255,255,255);
   font-size: 20px;
-  font-family: Sahel;
+  
 }
 .links{
   font-size: 20px !important;
 }
 .header{
-  font-family: Sahel !important;
+  /* font-family: Sahel !important; */
 
   color: white;
   bottom: 9vw;

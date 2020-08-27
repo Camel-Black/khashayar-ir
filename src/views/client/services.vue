@@ -1,42 +1,77 @@
 <template>
-    <div class="row" style="margin: 0px;width:100%;">
+    <div class="row" style="margin: 0px;width:100%;height:100hv">
         <!-- content part -->
     <div :class="`col-lg-10 col-xl-10 ${contentClasses}` " >
-        <div  class="d-flex justify-content-center align-items-center" >
+        <div id="container" class="d-flex justify-content-center align-items-center overflow-auto" style="min-height:100vh">
             <div>
                 <div class="tex-center d-flex justify-content-center">
-                    <div class="backgorund property-card " style="position:relative">
+                   
+                    <div class="kazem " style="position:relative" id="k">
+                        
                         <div class="text-right justify-content-start align-items-end align-content-center service-items">
-                            <h1 class="d-block align-items-start" style="color: rgb(255,255,255);font-family: Sahel;font-weight: bold;font-size: 40px">برنامه نویسی بک-اند</h1>
-                        </div>
-                        <div class="chips d-flex justify-content-center align-items-center curs" >
-                            <p class="d-flex justify-content-center align-items-center" style="font-family: Sahel;color: rgb(255,255,255);font-size: 15px;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;position:relative">
-                                تماس
-                                <i class="fa fa-info-circle" style="font-size: 15px;margin-left: 0.2vw;"></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="property-card " style="position:relative">
-                        <div class="text-right justify-content-start align-items-end align-content-center service-items">
-                            <h1 class="d-block align-items-start" style="color: rgb(255,255,255);font-family: Sahel;font-weight: bold;font-size: 2vw">برنامه نویسی بک-اند</h1>
-                            <div class="text-center float-right d-xl-flex justify-content-end align-self-end justify-content-xl-end" style="position:relative;height: 0.4vw;background-color: #e2935c;width: 10vw;border-radius: 5vw;margin-top: 0vw;"></div>
-                            <p class="text-right d-block" style="color: rgb(255,255,255);margin: 0px;margin-top: 3vw;font-size: .75vw;font-family: Sahel;">سولوم سوولوووومممم سولوم سولوووم</p>
+                            <img class="img" src="../../static/icons/001.svg" style="margin-left: 1em;margin-bottom:1em;margin-top:1.5em">
+                            <p class="text-right d-block p" style="color: rgb(255,255,255);margin: 0px;margin-right: 3vw;margin-top:5em">آشنا با دیزاین پترن ها و نحوه ی کارکرد آنها</p>
 
                         </div>
-                        <div class="chips d-flex justify-content-center align-items-center curs">
-                            <p class="d-flex justify-content-center align-items-center" style="font-family: Sahel;color: rgb(255,255,255);font-size: .60vw;width: 4vw;height: 1vw;margin: 0px;font-weight: bold;">
-                                تماس با من
-                                <i class="fa fa-info-circle" style="font-size: 0.8vw;margin-left: 0.2vw;"></i>
-                            </p>
+                        <a href="/aboutme" style="bottom:1em;right:2em;margin-top:2.5em;margin-left:1em;border-radius:10px;">
+                        <div >
+                            <span class="badge badge-danger">
+                                تماس با من <i class="fa fa-info-circle" style="font-size: 1em;"></i>
+                            </span>
                         </div>
+                        </a>
+                    </div>
+                    <div class="kazem " style="position:relative" id="k">
+                        
+                        <div class="text-right justify-content-start align-items-end align-content-center service-items">
+                            <img class="img" src="../../static/icons/003.svg" style="margin-left: 1em;margin-bottom:1em;margin-top:1.5em">
+                            <p class="text-right d-block p" style="color: rgb(255,255,255);margin: 0px;margin-right: 3vw;margin-top:5em">آشنا با دیزاین پترن ها و نحوه ی کارکرد آنها</p>
+
+                        </div>
+                        <a href="/aboutme" style="bottom:1em;right:2em;margin-top:2.5em;margin-left:1em;border-radius:10px;">
+                        <div >
+                            <span class="badge badge-danger">
+                                تماس با من <i class="fa fa-info-circle" style="font-size: 1em;"></i>
+                            </span>
+                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="text-center d-flex justify-content-center">
+                    <div class="kazem " style="position:relative" id="k">
+                        
+                        <div class="text-right justify-content-start align-items-end align-content-center service-items">
+                            <img class="img" src="../../static/icons/006.svg" style="margin-left: 1em;margin-bottom:1em;margin-top:1.5em">
+                            <p class="text-right d-block p" style="color: rgb(255,255,255);margin: 0px;margin-right: 3vw;margin-top:5em">آشنا با دیزاین پترن ها و نحوه ی کارکرد آنها</p>
+
+                        </div>
+                        <a href="/aboutme" style="bottom:1em;right:0;margin-top:2.5em;margin-left:1em;border-radius:10px;">
+                        <div >
+                            <span class="badge badge-danger">
+                                تماس با من <i class="fa fa-info-circle" style="font-size: 1em;"></i>
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="kazem " style="position:relative" id="k">
+                        
+                        <div class="text-right justify-content-start align-items-end align-content-center service-items">
+                            <img class="img" src="../../static/icons/004.svg" style="margin-left: 1em;margin-bottom:1em;margin-top:1.5em">
+                            <p class="text-right d-block p" style="color: rgb(255,255,255);margin: 0px;margin-right: 3vw;margin-top:5em">آشنا با دیزاین پترن ها و نحوه ی کارکرد آنها</p>
+
+                        </div>
+                        <a href="/aboutme" style="bottom:1em;right:2em;margin-top:2.5em;margin-left:1em;border-radius:10px;">
+                        <div >
+                            <span class="badge badge-danger">
+                                تماس با من <i class="fa fa-info-circle" style="font-size: 1em;"></i>
+                            </span>
+                        </div>
+                        </a>
+                    </div>
                 </div>
-                
             </div>
         </div>
-                <div @click="collapseSide" class="sandwich d-block d-sm-none  d-sm-block   d-md-block d-lg-none animated fadeInDown delay1s">
+               <div @click="collapseSide" class="sandwich d-block d-sm-none  d-sm-block   d-md-block d-lg-none animated fadeInDown delay1s">
         <a href="#"><i class="fa fa-bars" style="color: white;" ></i></a>
     </div>
     </div>
@@ -58,7 +93,7 @@
                         <li class="list-item underline"><a href="/" class="ul-link-a" style="color: white;">خانه</a><i class="fa fa-home" style="font-size: 20px; white"></i></li>
                         <li class="list-item active underline" style="color:#e2935c"><a href="/services" class="ul-link-a" style="color: #e2935c;">خدمات</a><i class="fa fa-suitcase icon" ></i></li>
                         <li class="list-item underline"><a href="/resume" class="ul-link-a" style="color: white;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 20px;white"></i></li>
-                        <li class="list-item underline"><a href="/aboutme" class="ul-link-a" style="color: white;">درباره من</a><i class="fa fa-user" style="font-size: 20px;color:white"></i></li>
+                        <li class="list-item underline"><a href="/aboutme" class="ul-link-a" style="color: white;">تماس با من</a><i class="fa fa-user" style="font-size: 20px;color:white"></i></li>
                         <li class="list-item  underline" ><a href="/blog" class="ul-link-a" style="color: white ">بلاگ</a><i class="fa fa-quote-right  " style=""></i></li>
                     </ul>
                 </div>
@@ -112,6 +147,57 @@ export default {
 
 @import url('../../../bootstrap/assets/css/styless-client.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css');
-@import url('../../assets/fonts/sahel/sahel-font.css');
+/* @import url('../../assets/fonts/sahel/sahel-font.css'); */
+.card-container{
+  direction:rtl;
+    text-align:right;
 
+    background-color: #3C1352;
+    margin-left:3vw;
+    height:24em;
+    width:27em;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    opacity: 0.4;
+    -ms-flex-direction:column;
+    flex-direction:column;
+    position:relative;
+    -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border-radius:16px;
+    overflow:hidden;
+
+}
+
+p{
+    font-family: 'Anjoman-FaNum';
+}
+.kazem{
+    margin: 1vw;
+    /* background: rgb(48,7,147); */
+    background: linear-gradient(298deg, rgba(48,7,147,1) 0%, rgba(82,21,156,1) 62%);
+  margin-left:3vw;
+  height:24em;
+  width:27em;
+    border-radius: 2vw;
+}
+
+.shombol:hover{
+    background-color: white !important;
+}
+#k:hover{
+    background-color:white !important
+}
+.img{
+    background-size: cover;
+    height: 10em;
+    width: 100%;
+    justify-self: center;
+}
+.p{
+    font-size: 16px !important;
+    font-weight: bold;
+}
 </style>

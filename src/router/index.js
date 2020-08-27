@@ -14,7 +14,7 @@ import resume from '../views/client/resume.vue'
 import aboutme from '../views/client/aboutme.vue'
 const DEFAULT_TITLE = 'Khashayar Mafi || خشایار مافی';
 import comments from '../views/admin/comments'
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
 import users from '../views/admin/users.vue'
 
 Vue.use(VueRouter)
@@ -123,7 +123,7 @@ const routes = [
     name:"Dashboard",
     component:dashboardHome,
     meta:{
-      requiresAuth: true
+      requiresAuth: true,
     }
   },
   {
@@ -165,12 +165,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-router.beforeResolve((to,from,next ) => {
-  if (to.name) {
-      NProgress.start()
-  }
-  next()
-})
+
 
 // router.beforeEach((to,from,next)=>{
 //   ViewUI.LoadingBar.start();
@@ -186,11 +181,11 @@ router.beforeResolve((to,from,next ) => {
 //     next();
 //   }
 // })
-
+// router.
 router.afterEach((to) => {
     Vue.nextTick(() => {
         document.title = to.meta.title || DEFAULT_TITLE;
-        NProgress.done()
+        // NProgress.done()
     });
     
     

@@ -84,7 +84,7 @@
                                                 <textarea type="text" v-model="content" style="height: 20vmax;padding:2vw;" class="d-flex justify-content-start form-control" placeholder=" نظر خود را بنویسید " ></textarea>
                                             </div>
                                         </div>
-                                        <VueHcaptcha @verify="onVerify" sitekey="d4daf2f1-0fe4-44cc-957f-0cdbf42ea0ae" style="border-radios: 5px;margin-top:2vh"></VueHcaptcha>
+
                                         <div class="row mt-2">
                                             <div class="col">
                                                 <button @click="sendCommnet" type="button" class="btn btn-light" style="margin:2vw"> ارسال</button>
@@ -118,7 +118,7 @@
                         <li class="list-item un"><a href="/" style="color: #3503BA;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خانه</a><i class="fa fa-home" style="font-size: 1vw; color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/services" style="color: #3503BA ;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خدمات</a><i class="fa fa-suitcase" style="font-size: 1vw;color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/resume" style="color: #3503BA;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 1vw;color:#3503BA"></i></li>
-                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">درباره من</a><i class="fa fa-user" style="font-size: 1vw;color:#3503BA"></i></li>
+                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">تماس با من</a><i class="fa fa-user" style="font-size: 1vw;color:#3503BA"></i></li>
                         <li class="list-item active un"><a href="/blog" style="color: #e2935c;font-size: 1.5vw;font-family: Anjoman-FaNum;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right" style="font-size: 1vw;"></i></li>
                     </ul>
                 </div>
@@ -141,7 +141,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import moment from 'moment'
-import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
+
 export default {
     data(){
         return{
@@ -155,10 +155,8 @@ export default {
             verified: false
         }
     },
-    components: { 
-        VueHcaptcha
-        }
-    ,
+
+    
     methods:{
         getSinglePost(){
             

@@ -39,7 +39,7 @@
                         <li class="list-item un"><a href="/" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خانه</a><i class="fa fa-home" style="font-size: 20px; color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/services" style="color: #3503BA ;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خدمات</a><i class="fa fa-suitcase" style="font-size: 20px;color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/resume" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 20px;color:#3503BA"></i></li>
-                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">درباره من</a><i class="fa fa-user" style="font-size: 20px;color:#3503BA"></i></li>
+                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">تماس با من</a><i class="fa fa-user" style="font-size: 20px;color:#3503BA"></i></li>
                         <li class="list-item active un"><a href="/blog" style="color: #e2935c;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right icon" style="font-size: 20px;"></i></li>
                     </ul>
                 </div>

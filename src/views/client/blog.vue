@@ -1,7 +1,7 @@
 <template>
     <div class="row" style="margin: 0px;width:100%;height:100vh">
         <!-- content part -->
-        <div class="col-lg-10 col-xl-10 col-md-12 col-sm-12 col-xs-12 back overflow-auto" style="height:100vh;float:right;text-align: right;" id="si" >
+        <div class="col-lg-10 col-xl-10 col-md-12 col-sm-12 col-xs-12 back " style="height:100vh;float:right;text-align: right;" id="si" >
             <div id="container" class="float-right " style="min-height:100vh;;margin-right:4vw;float:right;text-align: right;margin-bottom:30px">
                 <div v-for="post in posts" :key="post.id" class=" tex-center d-flex justify-content-center" style="display: flex;flex-wrap: wrap;align-content: flex-start; margin-top: 30px">
                     <div class="property-card " style="float:right;clear: right">
@@ -38,7 +38,7 @@
                         <li class="list-item un"><a href="/" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خانه</a><i class="fa fa-home" style="font-size: 20px; color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/services" style="color: #3503BA ;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">خدمات</a><i class="fa fa-suitcase" style="font-size: 20px;color:#3503BA"></i></li>
                         <li class="list-item un"><a href="/resume" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 20px;color:#3503BA"></i></li>
-                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">درباره من</a><i class="fa fa-user" style="font-size: 20px;color:#3503BA"></i></li>
+                        <li class="list-item un"><a href="/aboutme" style="color: #3503BA;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">تماس با من</a><i class="fa fa-user" style="font-size: 20px;color:#3503BA"></i></li>
                         <li class="list-item active un"><a href="/blog" style="color: #e2935c;font-size: 30px;font-family: Anjoman-FaNum;margin-right: 0.5vw;">بلاگ</a><i class="fa fa-quote-right icon" style="font-size: 20px;"></i></li>
                     </ul>
                 </div>

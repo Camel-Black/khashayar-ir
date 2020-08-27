@@ -4,6 +4,16 @@ const router = express.Router()
 const postSchema = require("../db/schema/post")
 const path = require('path')
 // const dashify = require('dashify')
+const {auth } = require('./middleware')
+const categoryC = require('../controller/categoryConrtoller')
+const userC = require('../controller/userController')
+const moment = require('moment')
+const multer = require('multer')
+const categorySchema = require('../db/schema/category')
+const commentC = require('../controller/commentController')
+const postC = require('../controller/postController')
+const { json } = require('body-parser')
+const sendmail = require('sendmail')({silent: true});
 
 
 const dashify =  function (titleStr){
@@ -17,15 +27,6 @@ const dashify =  function (titleStr){
         .replace(/-+/g, '-');
     return titleStr;       
 }
-const {auth } = require('./middleware')
-const categoryC = require('../controller/categoryConrtoller')
-const userC = require('../controller/userController')
-const moment = require('moment')
-const multer = require('multer')
-const categorySchema = require('../db/schema/category')
-const commentC = require('../controller/commentController')
-const postC = require('../controller/postController')
-const { json } = require('body-parser')
 
 const storage = multer.diskStorage({
     destination:function (req,file,cb) {
@@ -53,8 +54,34 @@ here we create comments with name and email and etc...
 ok lets go :)
 
 */
-//search post
 
+//send emails
+router.post('/sendemail',(req,res)=>{
+    let body = req.body
+    console.log(body)
+    try {
+        sendmail({
+            from: body.email,
+            to: 'khashayar.mafi75@gmail.com',
+            subject:"emial from website",
+            html:`<p>${body.content}</p>`
+        }, function(err, reply) {
+            console.log(err && err.stack);
+            console.dir(reply);
+        })
+        res.status(200).json({"meesage": "ایمیل فرستاده شد"})
+        
+    } catch (error) {
+        
+    }
+    
+})
+
+//search post
+router.post('/test',(req,res)=>{
+    console.log(req.body)
+    res.status(200).json({'res':res.body.Response})
+})
 router.post("/posts/sreach/:query",auth,async (req,res)=>{
     var query = req.params.query
     try {

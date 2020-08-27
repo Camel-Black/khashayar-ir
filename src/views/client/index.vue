@@ -7,7 +7,8 @@
                 <h2 style="font-weight: bold;font-size: 2vmax;text-align: right;color:white" class="animated fadeInDown delay0.5s">
                     یه برنامه نویس ساده
                 </h2>
-                <p style="font-size: 1vw;min-font-size:200px;color:white;opacity:0.5" class="animated fadeInDown delay1s">برنامه نویسی باید به گونه ای باشد که ما همگی بشاشیم به خودمان</p>
+                <p style="font-size: 1vw;min-font-size:200px;color:white;opacity:0.5;direction:rtl" class="animated fadeInDown delay1s">برنامه نویسی به گونه ای است که اصلا آدم خوشش می آید :)
+</p>
             </div>
             <div @click="collapseSide" class="sandwich d-block d-sm-none  d-sm-block   d-md-block d-lg-none animated fadeInDown delay1s">
                 <a href="#"><i class="fa fa-bars" style="color: white;" ></i></a>
@@ -34,7 +35,7 @@
                         <li class="list-item underline"><a href="/" class="ul-link-a" style="color: white;">خانه</a><i class="fa fa-home" style="font-size: 20px; white"></i></li>
                         <li class="list-item underline"><a href="/services" class="ul-link-a" style="color: white;">خدمات</a><i class="fa fa-suitcase" style="font-size: 20px;white"></i></li>
                         <li class="list-item underline"><a href="/resume" class="ul-link-a" style="color: white;">نمونه کارها</a><i class="fa fa-check-circle-o" style="font-size: 20px;white"></i></li>
-                        <li class="list-item underline"><a href="/aboutme" class="ul-link-a" style="color: white;">درباره من</a><i class="fa fa-user" style="font-size: 20px;color:white"></i></li>
+                        <li class="list-item underline"><a href="/aboutme" class="ul-link-a" style="color: white;">تماس با من</a><i class="fa fa-user" style="font-size: 20px;color:white"></i></li>
                         <li class="list-item underline" ><a href="/blog" class="ul-link-a" style="color: white">بلاگ</a><i class="fa fa-quote-right icon " style=""></i></li>
                     </ul>
                 </div>

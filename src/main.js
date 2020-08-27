@@ -10,13 +10,13 @@ import 'expose-loader?jquery!jquery'
 import "font-awesome/css/font-awesome.min.css";
 import '../node_modules/nprogress/nprogress.css'
 import VueAnalytics from 'vue-analytics'
+// import VueProgressBar from 'vue-progressbar'
 
 //defined as global component
 Vue.component('VueFontawesome', require('vue-fontawesome-icon/VueFontawesome.vue').default);
  
 
 Vue.use(BootstrapVue)
-
 
 Vue.use(VueAnalytics, {
   id: 'UA-173908665-2', router,
